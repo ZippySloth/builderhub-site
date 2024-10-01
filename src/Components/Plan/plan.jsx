@@ -1,8 +1,8 @@
 import React from 'react';
 import Location from '../../assets/Location.png';
-import Terrain from '../../terrain.jpg';
-import Terrain3 from '../../terrain3.jpg';
-import Appart from '../../appart.jpg';
+import Terrain from '../../assets/terrain.jpg';
+import Terrain3 from '../../assets/terrain3.jpg';
+import Appart from '../../assets/appart.jpg';
 
 
 const Plan = ({ language, translations }) => {
