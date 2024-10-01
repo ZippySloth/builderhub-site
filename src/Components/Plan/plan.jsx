@@ -1,16 +1,13 @@
-import React, { useContext } from 'react';
-import { LanguageContext } from '../../LanguageContext.jsx'; // Import LanguageContext for translations
+import React from 'react';
 
-const Plan = () => {
-  const { language, translations } = useContext(LanguageContext); // Access translations
-
+const Plan = ({ language, translations }) => {
   return (
-    <div className="bg-[#A58158] text-black py-10 px-5"> {/* Updated background color */}
+    <div className="bg-[#A58158] text-black py-10 px-5">
       <div className="container mx-auto">
 
         {/* Plan Overview Header */}
         <h1 className="text-4xl font-bold text-black mb-12 text-center">
-          {translations[language].planTitle}
+          {translations[language].investmentPlanOverview}
         </h1>
 
         {/* Section 1: Situation and Terrain Data */}
@@ -20,11 +17,11 @@ const Plan = () => {
               <h3 className="text-2xl font-bold text-[#F37021] mb-4">
                 {translations[language].locationOverview}
               </h3>
-              <p>{translations[language].locationDescription1}</p>
-              <p>{translations[language].locationDescription2}</p>
+              <p>{translations[language].locationDescription}</p>
+              <p>{translations[language].locationBenefits}</p>
             </div>
             <div className="flex justify-center">
-              <img src="/src/assets/Location.png" alt="Location Overview" className="rounded-lg shadow-md w-full md:w-3/4"/>
+              <img src="/src/assets/Location.png" alt={translations[language].locationOverview} className="rounded-lg shadow-md w-full md:w-3/4"/>
             </div>
           </div>
         </section>
@@ -33,7 +30,7 @@ const Plan = () => {
         <section className="mb-12">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="flex justify-center order-last md:order-first">
-              <img src="/src/assets/terrain.jpg" alt="Terrain Data" className="rounded-lg shadow-md w-full md:w-3/4"/>
+              <img src="/src/assets/terrain.jpg" alt={translations[language].terrainData} className="rounded-lg shadow-md w-full md:w-3/4"/>
             </div>
             <div className="bg-black p-6 rounded-lg shadow-md">
               <h3 className="text-2xl font-bold text-[#F37021] mb-4">
@@ -59,7 +56,7 @@ const Plan = () => {
               <p>{translations[language].architecturalDescription}</p>
             </div>
             <div className="flex justify-center">
-              <img src="/src/assets/terrain3.jpg" alt="Architectural Plan" className="rounded-lg shadow-md w-full md:w-3/4"/>
+              <img src="/src/assets/terrain3.jpg" alt={translations[language].architecturalOverview} className="rounded-lg shadow-md w-full md:w-3/4"/>
             </div>
           </div>
         </section>
@@ -71,16 +68,16 @@ const Plan = () => {
           </h2>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="flex justify-center">
-              <img src="/src/assets/appart.jpg" alt="Luxury Units" className="rounded-lg shadow-md w-full md:w-3/4"/>
+              <img src="/src/assets/appart.jpg" alt={translations[language].luxuryUnits} className="rounded-lg shadow-md w-full md:w-3/4"/>
             </div>
             <div className="bg-black p-6 rounded-lg shadow-md">
               <h3 className="text-2xl font-bold text-[#F37021] mb-4">
                 {translations[language].unitTypes}
               </h3>
               <ul className="list-disc pl-5 space-y-2 text-white">
-                <li>{translations[language].unitTypeA}</li>
-                <li>{translations[language].unitTypeB}</li>
-                <li>{translations[language].unitTypeC}</li>
+                <li>{translations[language].unitA}</li>
+                <li>{translations[language].unitB}</li>
+                <li>{translations[language].unitC}</li>
               </ul>
             </div>
           </div>
@@ -89,7 +86,7 @@ const Plan = () => {
         {/* Section 5: Costs Overview */}
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-black mb-6 text-center">
-            {translations[language].surfaceAndCosts}
+            {translations[language].surfaceCosts}
           </h2>
 
           {/* Responsive container for scrolling on small screens */}
@@ -100,15 +97,9 @@ const Plan = () => {
                   <th className="px-2 py-2 text-white text-xs md:text-base">
                     {translations[language].designation}
                   </th>
-                  <th className="px-2 py-2 text-xs md:text-base">
-                    {translations[language].surface}
-                  </th>
-                  <th className="px-2 py-2 text-xs md:text-base">
-                    {translations[language].costPerSqMeter}
-                  </th>
-                  <th className="px-2 py-2 text-xs md:text-base">
-                    {translations[language].totalCost}
-                  </th>
+                  <th className="px-2 py-2 text-xs md:text-base">{translations[language].surface}</th>
+                  <th className="px-2 py-2 text-xs md:text-base">{translations[language].costPerSquareMeter}</th>
+                  <th className="px-2 py-2 text-xs md:text-base">{translations[language].totalCost}</th>
                 </tr>
               </thead>
               <tbody>

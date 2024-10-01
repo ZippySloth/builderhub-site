@@ -40,7 +40,10 @@ const App = () => {
       />
       <Hero scrollToProject={() => scrollToSection(projectRef)} /> 
       <Project ref={projectRef} scrollToPlan={() => scrollToSection(planRef)} /> 
-      <div ref={planRef}><Plan /></div>
+      
+      {/* Pass language and translations as props to Plan */}
+      <div ref={planRef}><Plan language={language} translations={translations} /></div>
+
       <div ref={galleryRef} className="section"><Gallery /></div> 
       <div ref={neighborhoodRef} className="section"><Neighborhood /></div>
       <div ref={aboutRef} className="section"><About /></div>
