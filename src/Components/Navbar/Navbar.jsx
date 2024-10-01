@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { LanguageContext } from '../../LanguageContext.jsx';  
 import menuIcon from '/src/assets/menu.png';
 import closeIcon from '/src/assets/close-white.png';
+import Logo from '../../assets/Logo.png';
+import PhoneIcon from '../../assets/phone-white.png';
 
 export const Navbar = ({ scrollToSection, refs }) => {
   const [isOpen, setIsOpen] = useState(false); // State to handle navbar visibility on small screens
@@ -29,9 +31,9 @@ export const Navbar = ({ scrollToSection, refs }) => {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0`}
       >
-        <div className="navlogo mb-8">
-          <img src="/src/assets/Logo.png" alt="Logo" className="max-w-full" />
-        </div>
+       <div className="navlogo mb-8">
+  <img src={Logo} alt="Logo" className="max-w-full" />
+</div>
 
         {/* Nav Menu */}
         <ul className="space-y-4 text-lg font-light">
@@ -101,7 +103,7 @@ export const Navbar = ({ scrollToSection, refs }) => {
       {/* Call Button */}
       <div className="fixed top-4 left-6 lg:top-6 lg:right-6 lg:left-auto z-10 w-max">
         <a href="tel:+4389799268" className="flex items-center space-x-2 bg-[#F37021] text-white py-3 px-5 rounded-full shadow-md hover:bg-[#E65B1E] transition-all">
-          <img src="/src/assets/phone-white.png" alt="Phone Icon" className="w-6 h-6" />
+          <img src={PhoneIcon} alt="phoneicon" className="w-6 h-6" />
           <span className="text-lg font-semibold">+212 535 62 53 34</span>
         </a>
       </div>

@@ -1,5 +1,9 @@
 import React, { useContext } from 'react';
 import arrow from '../../assets/down-arrow.png'; // Ensure correct path to the arrow image
+import icon1 from '../../assets/icon1.png';
+import icon2 from '../../assets/icon2.png';
+import icon3 from '../../assets/icon3.png';
+import icon4 from '../../assets/icon4.png';
 import { LanguageContext } from '../../LanguageContext.jsx';  // Import LanguageContext for translations
 
 const Project = React.forwardRef((props, ref) => {
@@ -37,7 +41,7 @@ const Project = React.forwardRef((props, ref) => {
           {/* Feature 1 */}
           <div className="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
             <div className="w-20 h-20 bg-[#A27E55] rounded-full mx-auto mb-4 flex items-center justify-center">
-              <img src="/src/assets/icon1.png" alt="Location Icon" className="w-10 h-10" />
+              <img src={icon1} alt="Location Icon" className="w-10 h-10" />
             </div>
             <h3 className="text-xl font-semibold">{translations[language].location}</h3>
             <p className="text-gray-600 mt-2">{translations[language].locationDetail}</p>
@@ -46,7 +50,7 @@ const Project = React.forwardRef((props, ref) => {
           {/* Feature 2 */}
           <div className="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
             <div className="w-20 h-20 bg-[#F37021] rounded-full mx-auto mb-4 flex items-center justify-center">
-              <img src="/src/assets/icon2.png" alt="Facilities Icon" className="w-10 h-10" />
+              <img src={icon2} alt="Facilities Icon" className="w-10 h-10" />
             </div>
             <h3 className="text-xl font-semibold">{translations[language].facilities}</h3>
             <p className="text-gray-600 mt-2">{translations[language].facilitiesDetail}</p>
@@ -55,7 +59,7 @@ const Project = React.forwardRef((props, ref) => {
           {/* Feature 3 */}
           <div className="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
             <div className="w-20 h-20 bg-[#A27E55] rounded-full mx-auto mb-4 flex items-center justify-center">
-              <img src="/src/assets/icon3.png" alt="Green Spaces Icon" className="w-10 h-10" />
+              <img src={icon3} alt="Green Spaces Icon" className="w-10 h-10" />
             </div>
             <h3 className="text-xl font-semibold">{translations[language].greenSpaces}</h3>
             <p className="text-gray-600 mt-2">{translations[language].greenSpacesDetail}</p>
@@ -64,7 +68,7 @@ const Project = React.forwardRef((props, ref) => {
           {/* Feature 4 */}
           <div className="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
             <div className="w-20 h-20 bg-[#F37021] rounded-full mx-auto mb-4 flex items-center justify-center">
-              <img src="/src/assets/icon4.png" alt="Returns Icon" className="w-10 h-10" />
+              <img src={icon4} alt="Returns Icon" className="w-10 h-10" />
             </div>
             <h3 className="text-xl font-semibold">{translations[language].returns}</h3>
             <p className="text-gray-600 mt-2">{translations[language].returnsDetail}</p>

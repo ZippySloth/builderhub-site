@@ -1,4 +1,9 @@
 import React from 'react';
+import Location from '../../assets/Location.png';
+import Terrain from '../../terrain.jpg';
+import Terrain3 from '../../terrain3.jpg';
+import Appart from '../../appart.jpg';
+
 
 const Plan = ({ language, translations }) => {
   return (
@@ -21,7 +26,7 @@ const Plan = ({ language, translations }) => {
               <p>{translations[language].locationBenefits}</p>
             </div>
             <div className="flex justify-center">
-              <img src="/src/assets/Location.png" alt={translations[language].locationOverview} className="rounded-lg shadow-md w-full md:w-3/4"/>
+              <img src={Location} alt={translations[language].locationOverview} className="rounded-lg shadow-md w-full md:w-3/4"/>
             </div>
           </div>
         </section>
@@ -30,7 +35,7 @@ const Plan = ({ language, translations }) => {
         <section className="mb-12">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="flex justify-center order-last md:order-first">
-              <img src="/src/assets/terrain.jpg" alt={translations[language].terrainData} className="rounded-lg shadow-md w-full md:w-3/4"/>
+              <img src={Terrain} alt={translations[language].terrainData} className="rounded-lg shadow-md w-full md:w-3/4"/>
             </div>
             <div className="bg-black p-6 rounded-lg shadow-md">
               <h3 className="text-2xl font-bold text-[#F37021] mb-4">
@@ -56,7 +61,7 @@ const Plan = ({ language, translations }) => {
               <p>{translations[language].architecturalDescription}</p>
             </div>
             <div className="flex justify-center">
-              <img src="/src/assets/terrain3.jpg" alt={translations[language].architecturalOverview} className="rounded-lg shadow-md w-full md:w-3/4"/>
+              <img src={Terrain3} alt={translations[language].architecturalOverview} className="rounded-lg shadow-md w-full md:w-3/4"/>
             </div>
           </div>
         </section>
@@ -68,7 +73,7 @@ const Plan = ({ language, translations }) => {
           </h2>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="flex justify-center">
-              <img src="/src/assets/appart.jpg" alt={translations[language].luxuryUnits} className="rounded-lg shadow-md w-full md:w-3/4"/>
+              <img src={Appart} alt={translations[language].luxuryUnits} className="rounded-lg shadow-md w-full md:w-3/4"/>
             </div>
             <div className="bg-black p-6 rounded-lg shadow-md">
               <h3 className="text-2xl font-bold text-[#F37021] mb-4">
