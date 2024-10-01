@@ -12,7 +12,7 @@ const Neighborhood = () => {
       </h1>
       
       {/* Translation of the relevant information */}
-      <p className="text-lg mb-6 px-32 text-center">
+      <p className="text-lg mb-6 px-2">
         {translations[language].neighborhoodDescription} {/* Use translation for the neighborhood description */}
       </p>
 
