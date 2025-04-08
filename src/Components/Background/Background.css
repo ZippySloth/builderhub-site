@@ -1,15 +1,18 @@
-.background{
-    height:100%;
-    width: 100%;
-    float: left;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: none;
-    position: fixed;
-    object-fit: cover;
-    z-index: -2;
-    filter: brightness(70%); /* Reduce brightness to 70% to darken */
+#bg-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
 }
 
+.background-shape {
+  background: blue;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 15%, 0% 40%);
+
+}

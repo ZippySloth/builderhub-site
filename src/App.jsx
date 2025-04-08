@@ -1,78 +1,45 @@
-import React, { useRef, useContext } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './Components/Layout';
+import './index.css';
+import { ThemeProvider } from './context/ThemeContext';
+
 import Background from './Components/Background/Background';
-import { Navbar } from './Components/Navbar/Navbar';
 import Hero from './Components/Hero/Hero';
-import Project from './Components/Project/project.jsx';
-import Plan from './Components/Plan/plan.jsx';
-import Gallery from './Components/Gallery/gallery.jsx'; 
-import Neighborhood from './Components/Neighborhood/neighborhood.jsx';
-import About from './Components/About/about.jsx'; 
-import Invest from './Components/Invest/invest.jsx';
-import Contact from './Components/Contact/contact.jsx';
-import ScrollToTopButton from './Components/ScrollToTopButton/ScrollToTopButton';  
-import Footer from './Components/Footer/footer.jsx';
-import { LanguageContext } from './LanguageContext.jsx';  // Import LanguageContext
+import Contact from './Components/Contact/Contact';
+import PrivacyPolicy from './Pages/PrivacyPolicy';
+import AboutPage from './Pages/AboutPage';
+import ServicesPage from './Pages/ServicesPage';
+import HomePage from './Pages/HomePage';
+import Joinus from './Components/Joinus/Joinus';
+import RedditDatabase from './Pages/RedditDatabase'; // Ensure this import is present
 
 const App = () => {
-  const { language, translations } = useContext(LanguageContext);  // Access translations
-
-  // Create references for different sections
-  const aboutRef = useRef(null);
-  const projectRef = useRef(null);
-  const planRef = useRef(null);
-  const galleryRef = useRef(null); 
-  const neighborhoodRef = useRef(null);
-  const investRef = useRef(null);
-  const contactRef = useRef(null);
-
-  const scrollToSection = (sectionRef) => {
-    if (sectionRef.current) {
-      sectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div>
-      <Background />
-      <Navbar 
-        scrollToSection={scrollToSection} 
-        refs={{ aboutRef, projectRef, planRef, galleryRef, neighborhoodRef, investRef, contactRef }}
-      />
-      <Hero scrollToProject={() => scrollToSection(projectRef)} /> 
-      <Project ref={projectRef} scrollToPlan={() => scrollToSection(planRef)} /> 
-      
-      {/* Pass language and translations as props to Plan */}
-      <div ref={planRef}><Plan language={language} translations={translations} /></div>
-
-      <div ref={galleryRef} className="section"><Gallery /></div> 
-      <div ref={neighborhoodRef} className="section"><Neighborhood /></div>
-      <div ref={aboutRef} className="section"><About /></div>
-
-      {/* Invest section with translations */}
-      <div ref={investRef} className="section">
-        <Invest 
-          title={translations[language].investTitle} 
-          description={translations[language].investDescription}
-          nameLabel={translations[language].nameLabel}
-          namePlaceholder={translations[language].namePlaceholder}
-          emailLabel={translations[language].emailLabel}
-          emailPlaceholder={translations[language].emailPlaceholder}
-          investmentAmountLabel={translations[language].investmentAmountLabel}
-          investmentAmountPlaceholder={translations[language].investmentAmountPlaceholder}
-          submitButton={translations[language].submitButton}
-          thankYouMessage={translations[language].thankYouMessage}
-          contactSoon={translations[language].contactSoon}
-        />
-      </div>
-
-      <div ref={contactRef} className="section"><Contact /></div>
-
-      {/* Add the scroll to top button */}
-      <ScrollToTopButton />
-
-      {/* Add the Footer */}
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/classic"
+              element={
+                <>
+                  <Background />
+                  <Hero />
+                  <Joinus />
+                  <Contact />
+                </>
+              }
+            />
+            <Route path="/web" element={<ServicesPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/viral" element={<RedditDatabase />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   );
 };
 

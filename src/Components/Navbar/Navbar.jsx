@@ -1,113 +1,79 @@
-import React, { useState, useContext } from 'react';
-import { LanguageContext } from '../../LanguageContext.jsx';  
-import menuIcon from '/src/assets/menu.png';
-import closeIcon from '/src/assets/close-white.png';
-import Logo from '../../assets/Logo.png';
-import PhoneIcon from '../../assets/phone-white.png';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/Components/ui/sheet";
+import ModeToggle from "@/components/mode-toggle";
 
-export const Navbar = ({ scrollToSection, refs }) => {
-  const [isOpen, setIsOpen] = useState(false); // State to handle navbar visibility on small screens
-  const { language, switchLanguage, translations } = useContext(LanguageContext);  // Access the current language and translations
+import logoBlack from "../../assets/logo_black.png";
+import logoWhite from "../../assets/logo_white.png";
 
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen); // Toggle the navbar open/close
-  };
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const handleToggle = () => setIsOpen(!isOpen);
+  const handleClose = () => setIsOpen(false);
+
+  const navLinkClass = (path) =>
+    `text-sm font-medium transition-colors hover:text-primary ${
+      currentPath === path ? "text-primary font-semibold" : "text-muted-foreground"
+    }`;
 
   return (
-    <div>
-      {/* Menu Icon for smaller screens (hamburger icon or close icon) */}
-      <div className="md:hidden absolute top-4 right-4 z-50"> {/* Move to the right */}
-        <img
-          src={isOpen ? closeIcon : menuIcon}
-          alt="Menu Icon"
-          className="w-10 h-10 cursor-pointer"
-          onClick={toggleNavbar}
-        />
-      </div>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <img src={logoBlack} alt="Buildrhub Logo" className="h-8 md:h-10 block dark:hidden" />
+          <img src={logoWhite} alt="Buildrhub Logo" className="h-8 md:h-10 hidden dark:block" />
+        </Link>
 
-      {/* Full Navbar for large screens and sliding in for small screens */}
-      <div
-        className={`absolute top-0 left-0 h-full bg-gradient-to-b from-[#0F0F0F] via-[#0F0F0F] via-70% to-transparent p-5 text-[#A07C52] flex flex-col justify-start z-50 w-[300px] transition-transform duration-300 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0`}
-      >
-       <div className="navlogo mb-8">
-  <img src={Logo} alt="Logo" className="max-w-full" />
-</div>
+        {/* Center Navigation */}
+        <nav className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex gap-6">
+          <Link to="/web" className={navLinkClass("/web")}>
+            Web Services
+          </Link>
+          <Link to="/viral" className={navLinkClass("/viral")}>
+            Reddit Database
+          </Link>
+          <Link to="/about" className={navLinkClass("/about")}>
+            About
+          </Link>
+          <Link to="/contact" className={navLinkClass("/contact")}>
+            Contact
+          </Link>
+        </nav>
 
-        {/* Nav Menu */}
-        <ul className="space-y-4 text-lg font-light">
-          <li
-            onClick={() => { scrollToSection(refs.aboutRef); toggleNavbar(); }}  // Close after click
-            className="hover:text-[#F37021] cursor-pointer"
-          >
-            {translations[language].about}  {/* Translated "About" */}
-          </li>
-          <li
-            onClick={() => { scrollToSection(refs.projectRef); toggleNavbar(); }}  // Close after click
-            className="hover:text-[#F37021] cursor-pointer"
-          >
-            {translations[language].project}  {/* Translated "Project" */}
-          </li>
-          <li
-            onClick={() => { scrollToSection(refs.planRef); toggleNavbar(); }}  // Close after click
-            className="hover:text-[#F37021] cursor-pointer"
-          >
-            {translations[language].plan}  {/* Translated "Plan" */}
-          </li>
-          <li
-            onClick={() => { scrollToSection(refs.galleryRef); toggleNavbar(); }}  // Close after click
-            className="hover:text-[#F37021] cursor-pointer"
-          >
-            {translations[language].gallery}  {/* Translated "Gallery" */}
-          </li>
-          <li
-            onClick={() => { scrollToSection(refs.neighborhoodRef); toggleNavbar(); }}  // Close after click
-            className="hover:text-[#F37021] cursor-pointer"
-          >
-            {translations[language].neighborhood}  {/* Translated "Neighborhood" */}
-          </li>
-          <li
-            onClick={() => { scrollToSection(refs.investRef); toggleNavbar(); }}  // Close after click
-            className="hover:text-[#F37021] cursor-pointer"
-          >
-            {translations[language].invest}  {/* Translated "Invest" */}
-          </li>
-          <li
-            onClick={() => { scrollToSection(refs.contactRef); toggleNavbar(); }}  // Close after click
-            className="hover:text-[#F37021] cursor-pointer navcontact"
-          >
-            {translations[language].contact}  {/* Translated "Contact" */}
-          </li>
-        </ul>
-
-        {/* Language Switcher */}
-        <div className="mt-10 flex flex-col gap-3">
-          <a
-            href="#"
-            onClick={() => switchLanguage('fr')}
-            className="text-[#A07C52] hover:text-[#F37021] font-bold text-lg"
-          >
-            FR
-          </a>
-          <a
-            href="#"
-            onClick={() => switchLanguage('en')}
-            className="text-[#A07C52] hover:text-[#F37021] font-bold text-lg"
-          >
-            EN
-          </a>
+        {/* Right actions */}
+        <div className="flex items-center gap-2">
+          <ModeToggle className="w-9 h-9 border rounded-md flex items-center justify-center hover:scale-105 transition-all" />
+          <div className="md:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger onClick={handleToggle}>
+                <Menu className="h-6 w-6" />
+              </SheetTrigger>
+              <SheetContent side="right" className="p-6">
+                <nav className="flex flex-col gap-6 mt-12 text-base font-medium">
+                  <Link to="/web" onClick={handleClose}>
+                    Web Services
+                  </Link>
+                  <Link to="/viral" onClick={handleClose}>
+                    Reddit Database
+                  </Link>
+                  <Link to="/about" onClick={handleClose}>
+                    About
+                  </Link>
+                  <Link to="/contact" onClick={handleClose}>
+                    Contact
+                  </Link>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
-
-      {/* Call Button */}
-      <div className="fixed top-4 left-6 lg:top-6 lg:right-6 lg:left-auto z-10 w-max">
-        <a href="tel:+4389799268" className="flex items-center space-x-2 bg-[#F37021] text-white py-3 px-5 rounded-full shadow-md hover:bg-[#E65B1E] transition-all">
-          <img src={PhoneIcon} alt="phoneicon" className="w-6 h-6" />
-          <span className="text-lg font-semibold">+212 535 62 53 34</span>
-        </a>
-      </div>
-    </div>
+    </header>
   );
 };
 

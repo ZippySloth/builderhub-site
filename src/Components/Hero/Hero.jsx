@@ -1,86 +1,63 @@
-import React, { useState, useEffect, useContext } from 'react';
-import arrow from '../../assets/down-arrow.png';
-import Clinic from '../../assets/Clinic.webp';
-import ClinicOffice from '../../assets/ClinicOffice.webp';
-import Reception from '../../assets/Reception.webp';
-import Pool1 from '../../assets/Pool2.webp';
-import { LanguageContext } from '../../LanguageContext'; // Import LanguageContext
+import React from "react"
+import { ArrowRight, Database } from "lucide-react"
+import { Button } from "../ui/button" // <-- relative path
+import { useNavigate } from "react-router-dom";
+import SynthwaveBackground from "../SynthwaveBackground";
+import { useTheme } from "../../context/ThemeContext";
 
-export const Hero = ({ scrollToProject }) => {
-    const images = [ClinicOffice, Clinic, Reception, Pool1]; // Array of images
-    const [heroCount, setHeroCount] = useState(0);
-    const [direction, setDirection] = useState("forward"); // Track sliding direction
-    const { language, translations } = useContext(LanguageContext);  // Access language and translations
+const Hero = () => {
+  const navigate = useNavigate();
+  const { isDarkMode } = useTheme();
 
-    // Automatically move to the next image and text every 3 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setHeroCount((prevHeroCount) => (prevHeroCount + 1) % images.length);
-            setDirection("forward"); // Set direction to forward on auto-slide
-        }, 3000); // Change image every 3 seconds
-
-        return () => clearInterval(interval); // Clear the interval when the component unmounts
-    }, [images.length]);
-
-    // Handle when a dot is clicked
-    const handleDotClick = (index) => {
-        // If user clicks on a dot, determine if it's forward or backward
-        setDirection(index > heroCount ? "forward" : "backward");
-        setHeroCount(index);
-    };
-
-    return (
-        <div className='relative overflow-hidden'>
-            <div className='flex transition-transform duration-700 ease-in-out' style={{ transform: `translateX(-${heroCount * 100}%)` }}>
-                {/* Images sliding horizontally */}
-                {images.map((image, index) => (
-                    <div key={index} className='min-w-full h-screen flex-shrink-0 relative'>
-                        <img
-                            src={image}
-                            className="w-full h-full object-cover filter brightness-50" // Apply dark filter here
-                            alt={`Slide ${index}`}
-                        />
-                    </div>
-                ))}
-            </div>
-
-            {/* Text section with slide animation, now using <h1> */}
-            <div className='absolute top-1/2 transform -translate-y-1/2 left-16 md:left-[200px] lg:left-[350px] text-white text-left'>
-                <div key={heroCount} className='text-left'>
-                    <h1 className='text-5xl md:text-6xl lg:text-[110px] font-medium leading-tight'>
-                        {translations[language].hero[heroCount].text1}  {/* Translated first line */}
-                    </h1>
-                    <h1 className='text-5xl md:text-6xl lg:text-[110px] font-medium leading-tight'>
-                        {translations[language].hero[heroCount].text2}  {/* Translated second line */}
-                    </h1>
-                </div>
-            </div>
-
-            {/* View Project Section */}
-            <div 
-              onClick={scrollToProject} 
-              className="absolute z-50 bottom-16 md:bottom-32 left-1/2 transform -translate-x-1/2 flex items-center gap-10 px-8 py-3 pl-12 mb-8 md:mb-0 rounded-full bg-[#050505] cursor-pointer hover:bg-[#050505] whitespace-nowrap"
-            >
-              <p className="text-[#A07C52] text-lg md:text-xl hover:text-[#F37021] transition-colors">
-                {translations[language].viewProject}  {/* Translated "View Project" */}
+  return (
+    <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 px-5 lg:px-8 xl:px-[8%]">
+      <div className="absolute inset-0 z-0">
+        <SynthwaveBackground isDarkMode={isDarkMode} /> {/* Pass the prop */}
+      </div>
+      <div className="container relative z-10 px-4 md:px-6">
+        <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+          <div className="flex flex-col justify-center space-y-4">
+            <div className="space-y-2">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                Build, Connect, Discover
+              </h1>
+              <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                Your creative developer hub for web services and daily viral content from the tech world.
               </p>
-              <img src={arrow} alt="Arrow icon" className="w-6 h-6" />
             </div>
+            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <Button size="lg" className="gap-1" onClick={() => navigate('/web')}>
+                Explore Services <ArrowRight className="h-4 w-4" />
+              </Button>
 
-            {/* Dots for navigation */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex justify-between mt-28">
-                <ul className="flex items-center gap-6">
-                    {images.map((_, index) => (
-                        <li
-                            key={index}
-                            onClick={() => handleDotClick(index)}
-                            className={`w-4 h-4 rounded-full cursor-pointer ${heroCount === index ? "bg-[#F37021]" : "bg-white"}`}
-                        ></li>
-                    ))}
-                </ul>
+              <Button size="lg" variant="outline" className="gap-1">
+                Access Database <Database className="h-4 w-4" />
+              </Button>
             </div>
+          </div>
+          <div className="mx-auto aspect-video w-full max-w-[600px] overflow-hidden rounded-xl border bg-muted/50 p-2">
+            <div className="flex h-full w-full flex-col rounded-lg bg-background p-4">
+              <div className="flex items-center gap-2 border-b pb-2">
+                <div className="h-3 w-3 rounded-full bg-red-500" />
+                <div className="h-3 w-3 rounded-full bg-yellow-500" />
+                <div className="h-3 w-3 rounded-full bg-green-500" />
+                <div className="ml-2 text-xs font-medium">buildrhub.terminal</div>
+              </div>
+              <div className="flex-1 p-2 text-sm">
+                <div className="text-green-500">$ buildrhub --init</div>
+                <div className="mt-2">Initializing Buildrhub environment...</div>
+                <div className="mt-1">Loading web services...</div>
+                <div className="mt-1">Connecting to Reddit API...</div>
+                <div className="mt-1">Fetching latest viral posts in tech categories...</div>
+                <div className="mt-2 text-green-500">$ Ready to explore! Welcome to Buildrhub.</div>
+                <div className="mt-4 animate-pulse">_</div>
+              </div>
+            </div>
+          </div>
         </div>
-    );
-};
+      </div>
+    </section>
+  )
+}
 
-export default Hero;
+export default Hero

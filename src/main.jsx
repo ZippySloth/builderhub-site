@@ -1,16 +1,10 @@
-// src/main.jsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
-import LanguageProvider from './LanguageContext.jsx'; 
-
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <LanguageProvider>  {/* Wrap the App component with LanguageProvider */}
-      <App />
-    </LanguageProvider>
-  </StrictMode>
+// Render the App component into the root div
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
