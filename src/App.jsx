@@ -4,9 +4,8 @@ import Layout from './Components/Layout';
 import './index.css';
 import { ThemeProvider } from './context/ThemeContext';
 
-import Background from './Components/Background/Background';
 import Hero from './Components/Hero/Hero';
-import Contact from './Components/Contact/Contact';
+import ContactPage from './Pages/ContactPage';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import AboutPage from './Pages/AboutPage';
 import ServicesPage from './Pages/ServicesPage';
@@ -25,16 +24,15 @@ const App = () => {
               path="/classic"
               element={
                 <>
-                  <Background />
                   <Hero />
                   <Joinus />
-                  <Contact />
                 </>
               }
             />
             <Route path="/web" element={<ServicesPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/viral" element={<RedditDatabase />} />
+            <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
         </Layout>

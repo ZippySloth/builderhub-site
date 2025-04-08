@@ -15,7 +15,7 @@ const RedditDatabasePage = () => {
   useEffect(() => {
     const fetchContent = async () => {
       const { data, error } = await supabase
-        .from('reddit_posts') // ✅ Use your Supabase table name here
+        .from('posts') // ✅ Use your Supabase table name here
         .select('*');
 
       if (error) {
