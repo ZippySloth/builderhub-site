@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/Components/ui/sheet";
-import ModeToggle from "@/components/mode-toggle";
+import ModeToggle from "@/Components/mode-toggle";
 
 import logoBlack from "../../assets/logo_black.png";
 import logoWhite from "../../assets/logo_white.png";
