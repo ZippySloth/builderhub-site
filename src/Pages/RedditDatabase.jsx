@@ -4,42 +4,49 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/Componen
 import { Badge } from '@/Components/ui/badge';
 import { Button } from '@/Components/ui/button';
 import { Input } from '@/Components/ui/input';
-import { ExternalLink, Zap, Flame } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/Components/ui/dropdown-menu";
+import { ExternalLink, Zap, Flame, Clock, ChevronDown } from 'lucide-react';
 import { supabase } from '../supabaseClient';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
+// Define CATEGORIES constant before using it
 const CATEGORIES = [
   {
     id: "ai",
     name: "AI",
-    subreddits: ["artificial", "ChatGPT", "OpenAI", "GPT3", "MachineLearning", "LangChain", "AutoGPT"]
+    subreddits: ["artificial", "chatgpt", "openai", "gpt3", "machinelearning", "langchain", "autogpt"]
   },
   {
     id: "automation",
     name: "Automation",
-    subreddits: ["Python", "algotrading", "3Dprinting", "automation", "RPA", "PLC"]
+    subreddits: ["python", "algotrading", "3dprinting", "automation", "rpa", "plc"]
   },
   {
     id: "business",
     name: "Business",
-    subreddits: ["Entrepreneur", "smallbusiness", "startups", "business"]
-  },
-  {
-    id: "ecommerce",
-    name: "E-commerce",
-    subreddits: ["ecommerce", "digitalmarketing", "SEO"]
+    subreddits: ["entrepreneur", "smallbusiness", "startups", "business", "ecommerce", "digitalmarketing"]
   },
   {
     id: "marketing",
     name: "Marketing",
-    subreddits: ["marketing", "content_marketing", "PPC", "socialmedia", "advertising"]
+    subreddits: ["marketing", "content_marketing", "ppc", "socialmedia", "advertising", "seo"]
+  },
+  {
+    id: "markets",
+    name: "Markets",
+    subreddits: ["stocks", "stockmarket", "investing", "wallstreetbets", "pennystocks", "valueinvesting", "educatedinvesting", "dividends", "baystreetbets"]
   },
   {
     id: "personal-dev",
     name: "Personal Dev",
-    subreddits: ["Showerthoughts", "GetDisciplined", "productivity", "selfimprovement", "GetMotivated", "DecidingToBeBetter"]
+    subreddits: ["showerthoughts", "getdisciplined", "productivity", "selfimprovement", "getmotivated", "decidingtobebetter"]
   }
 ];
 
@@ -48,35 +55,32 @@ const RedditDatabasePage = () => {
   const [techContent, setTechContent] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortByPopular, setSortByPopular] = useState(false);
-  const [uniquePosts, setUniquePosts] = useState(new Set());
+  const [sortBy, setSortBy] = useState("newest");
 
   useEffect(() => {
     const fetchContent = async () => {
       setIsLoading(true);
-      const { data, error } = await supabase
-        .from('posts')
-        .select('*')
-        .order('created_at', { ascending: false });
+      try {
+        const { data, error } = await supabase
+          .from('posts')
+          .select('*')
+          .order('created_at', { ascending: false });
 
-      if (error) {
-        console.error('Supabase fetch error:', error);
-      } else {
-        // Remove duplicates by link
-        const uniqueData = [];
-        const seenLinks = new Set();
-        
-        data.forEach(post => {
-          if (!seenLinks.has(post.link)) {
-            seenLinks.add(post.link);
-            uniqueData.push(post);
+        if (error) throw error;
+
+        const uniquePosts = data.reduce((acc, post) => {
+          if (!acc.some(p => p.link === post.link)) {
+            acc.push(post);
           }
-        });
+          return acc;
+        }, []);
 
-        setTechContent(uniqueData);
-        setUniquePosts(seenLinks);
+        setTechContent(uniquePosts);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     fetchContent();
@@ -85,32 +89,40 @@ const RedditDatabasePage = () => {
   const filteredContent = () => {
     let results = [...techContent];
     
-    // Apply search filter
-    if (searchQuery) {
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
       results = results.filter(item => 
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        item.subreddit.toLowerCase().includes(searchQuery.toLowerCase())
+        item.title.toLowerCase().includes(query) || 
+        (item.subreddit && item.subreddit.toLowerCase().includes(query)) ||
+        (item.description && item.description.toLowerCase().includes(query))
       );
     }
     
-    // Apply category filter if not "all"
     if (activeTab !== "all") {
       const category = CATEGORIES.find(c => c.id === activeTab);
       if (category) {
         results = results.filter(item => 
-          category.subreddits.includes(item.subreddit)
+          item.subreddit && 
+          category.subreddits.includes(item.subreddit.toLowerCase())
         );
       }
     }
     
-    // Apply popularity sort
-    if (sortByPopular) {
-      results.sort((a, b) => b.upvotes - a.upvotes);
-    } else {
-      results.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    switch(sortBy) {
+      case "popular":
+        return [...results].sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+      case "newest":
+      default:
+        return [...results].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     }
-    
-    return results;
+  };
+
+  const getPostCountForCategory = (categoryId) => {
+    if (categoryId === "all") return techContent.length;
+    const category = CATEGORIES.find(c => c.id === categoryId);
+    return techContent.filter(post => 
+      category.subreddits.includes(post.subreddit.toLowerCase())
+    ).length;
   };
 
   return (
@@ -121,9 +133,9 @@ const RedditDatabasePage = () => {
             <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground animate-pulse-slow">
               Daily Updates
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Tech Content Database</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">BuildrHub Trendbase</h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl">
-              Curated posts from Reddit on tech topics
+            Access Reddit’s best tech, business, and growth content — updated daily.
             </p>
           </div>
         </div>
@@ -131,10 +143,10 @@ const RedditDatabasePage = () => {
         <div className="mx-auto w-full max-w-7xl py-12 px-4">
           <div className="mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="flex flex-col md:flex-row gap-4 w-full">
-              <Tabs defaultValue={activeTab} className="w-full md:w-auto">
-                <TabsList className="flex-wrap">
+              <Tabs defaultValue={activeTab} className="w-full">
+                <TabsList className="flex-wrap h-auto">
                   <TabsTrigger value="all" onClick={() => setActiveTab("all")}>
-                    All Posts
+                    All Posts ({techContent.length})
                   </TabsTrigger>
                   {CATEGORIES.map((category) => (
                     <TabsTrigger
@@ -142,28 +154,52 @@ const RedditDatabasePage = () => {
                       value={category.id}
                       onClick={() => setActiveTab(category.id)}
                     >
-                      {category.name}
+                      {category.name} ({getPostCountForCategory(category.id)})
                     </TabsTrigger>
                   ))}
                 </TabsList>
               </Tabs>
               
-              <Button 
-                variant={sortByPopular ? "default" : "outline"} 
-                onClick={() => setSortByPopular(!sortByPopular)}
-                className="gap-2"
-              >
-                <Flame className="h-4 w-4" />
-                {sortByPopular ? "Showing Popular" : "Sort by Popularity"}
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="gap-2 shrink-0">
+                    {sortBy === "newest" ? (
+                      <>
+                        <Clock className="h-4 w-4" />
+                        Newest
+                      </>
+                    ) : (
+                      <>
+                        <Flame className="h-4 w-4" />
+                        Popular
+                      </>
+                    )}
+                    <ChevronDown className="h-4 w-4 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => setSortBy("newest")}>
+                    <Clock className="mr-2 h-4 w-4" />
+                    <span>Newest</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSortBy("popular")}>
+                    <Flame className="mr-2 h-4 w-4" />
+                    <span>Popular</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
             
             <Input
               placeholder="Search all posts..."
-              className="w-full md:w-64"
+              className="w-full md:w-64 shrink-0"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+          </div>
+
+          <div className="mb-4 text-sm text-muted-foreground">
+            Showing: {filteredContent().length} posts | {activeTab !== "all" ? `${CATEGORIES.find(c => c.id === activeTab)?.name} posts` : "All posts"}
           </div>
 
           {isLoading ? (
@@ -196,7 +232,7 @@ const RedditDatabasePage = () => {
                     <Card key={item.id} className="overflow-hidden hover:shadow-md transition-shadow">
                       <CardHeader className="pb-2">
                         <div className="flex items-center gap-2">
-                          <Badge variant="outline">{item.subreddit}</Badge>
+                          <Badge variant="outline">{item.subreddit || 'reddit'}</Badge>
                           <div className="text-xs text-muted-foreground">
                             {dayjs(item.created_at).fromNow()}
                           </div>
@@ -210,7 +246,7 @@ const RedditDatabasePage = () => {
                       </CardContent>
                       <CardFooter className="flex items-center justify-between">
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Zap className="h-4 w-4 text-yellow-500" /> {item.upvotes} upvotes
+                          <Zap className="h-4 w-4 text-yellow-500" /> {item.upvotes || 0} upvotes
                         </div>
                         <Button variant="ghost" size="sm" className="gap-1 group" asChild>
                           <a href={item.link} target="_blank" rel="noopener noreferrer">
