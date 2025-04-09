@@ -10,13 +10,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
-import { ExternalLink, Zap, Flame, Clock, ChevronDown } from 'lucide-react';
+import { ExternalLink, Zap, Flame, Clock, ChevronDown, ArrowUp } from 'lucide-react';
 import { supabase } from '../supabaseClient';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
-// Define CATEGORIES constant before using it
 const CATEGORIES = [
   {
     id: "ai",
@@ -56,6 +55,7 @@ const RedditDatabasePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -85,6 +85,26 @@ const RedditDatabasePage = () => {
 
     fetchContent();
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   const filteredContent = () => {
     let results = [...techContent];
@@ -133,9 +153,9 @@ const RedditDatabasePage = () => {
             <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground animate-pulse-slow">
               Daily Updates
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">BuildrHub Trendbase</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Explore the Trendbase</h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl">
-            Access Reddit’s best tech, business, and growth content — updated daily.
+              Search and filter the most viral Reddit posts in AI, business, markets, marketing, and personal growth — updated daily.
             </p>
           </div>
         </div>
@@ -145,7 +165,11 @@ const RedditDatabasePage = () => {
             <div className="flex flex-col md:flex-row gap-4 w-full">
               <Tabs defaultValue={activeTab} className="w-full">
                 <TabsList className="flex-wrap h-auto">
-                  <TabsTrigger value="all" onClick={() => setActiveTab("all")}>
+                  <TabsTrigger 
+                    value="all" 
+                    onClick={() => setActiveTab("all")}
+                    className="transition-all hover:bg-primary/10 hover:text-primary"
+                  >
                     All Posts ({techContent.length})
                   </TabsTrigger>
                   {CATEGORIES.map((category) => (
@@ -153,16 +177,19 @@ const RedditDatabasePage = () => {
                       key={category.id}
                       value={category.id}
                       onClick={() => setActiveTab(category.id)}
+                      className="transition-all hover:bg-primary/10 hover:text-primary"
                     >
                       {category.name} ({getPostCountForCategory(category.id)})
                     </TabsTrigger>
                   ))}
                 </TabsList>
               </Tabs>
-              
+            </div>
+            
+            <div className="flex gap-4 w-full md:w-auto">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="gap-2 shrink-0">
+                  <Button variant="outline" className="gap-2 w-full md:w-[140px]">
                     {sortBy === "newest" ? (
                       <>
                         <Clock className="h-4 w-4" />
@@ -188,14 +215,14 @@ const RedditDatabasePage = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+              
+              <Input
+                placeholder="Search all posts..."
+                className="w-full md:w-64"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
-            
-            <Input
-              placeholder="Search all posts..."
-              className="w-full md:w-64 shrink-0"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
           </div>
 
           <div className="mb-4 text-sm text-muted-foreground">
@@ -263,6 +290,18 @@ const RedditDatabasePage = () => {
           )}
         </div>
       </div>
+
+      {/* Scroll to top button */}
+      {showScrollButton && (
+        <Button
+          onClick={scrollToTop}
+          size="icon"
+          className="fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full shadow-lg transition-all hover:scale-110"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="h-5 w-5" />
+        </Button>
+      )}
     </section>
   );
 };

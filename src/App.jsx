@@ -12,12 +12,16 @@ import ServicesPage from './Pages/ServicesPage';
 import HomePage from './Pages/HomePage';
 import Joinus from './Components/Joinus/Joinus';
 import RedditDatabase from './Pages/RedditDatabase'; // Ensure this import is present
+import ScrollToTop from './ScrollToTop';
+import CookiesConsent from "@/Components/CookiesConsent/CookiesConsent";
 
 const App = () => {
   return (
     <ThemeProvider>
+      <CookiesConsent />
       <Router>
         <Layout>
+        <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route
@@ -33,7 +37,7 @@ const App = () => {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/viral" element={<RedditDatabase />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
           </Routes>
         </Layout>
       </Router>

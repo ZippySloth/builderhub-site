@@ -1,70 +1,142 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const PrivacyPolicy = () => {
+export default function PrivacyPolicy() {
   return (
-    <div>
-      <section className="container mx-auto py-20 px-5 lg:px-24 text-black dark:text-white mt-10">
-        <h1 className="text-4xl font-bold text-center mb-8">Privacy Policy</h1>
-        
-        <p className="mb-4">
-          At <strong>BuildRhub</strong>, we are committed to protecting your personal information and your right to privacy.
-          This Privacy Policy describes how we collect, use, and protect your information when you visit our website{" "}
-          <a href="https://buildrhub.io" className="text-blue-500 underline">
-            https://buildrhub.io
-          </a>.
-        </p>
+    <div className="container max-w-4xl py-12 mx-auto">
+      <div className="space-y-8 ">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold tracking-tight">Privacy Policy</h1>
+          <p className="text-muted-foreground">Last updated: April 8, 2025</p>
+        </div>
 
-        <h2 className="text-2xl font-bold mt-10 mb-4">Information We Collect</h2>
-        <p className="mb-4">
-          We collect personal information that you provide to us when you use our website, such as your name, email address,
-          business information, and any other information you voluntarily provide through our contact forms.
-        </p>
+        <div className="space-y-6">
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">Introduction</h2>
+            <p>
+              BuildrHub ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how
+              your personal information is collected, used, and disclosed by BuildrHub.
+            </p>
+            <p>
+              This Privacy Policy applies to our website, and its associated subdomains (collectively, our "Service")
+              alongside our application, BuildrHub. By accessing or using our Service, you signify that you have read,
+              understood, and agree to our collection, storage, use, and disclosure of your personal information as
+              described in this Privacy Policy and our Terms of Service.
+            </p>
+          </section>
 
-        <h2 className="text-2xl font-bold mt-10 mb-4">How We Use Your Information</h2>
-        <p className="mb-4">The information we collect is used to:</p>
-        <ul className="list-disc ml-8 mb-4">
-          <li>Respond to your inquiries and requests</li>
-          <li>Provide services you request</li>
-          <li>Improve our website functionality and content</li>
-          <li>Communicate with you about updates and promotions</li>
-        </ul>
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">Definitions and Key Terms</h2>
+            <p>
+              To help explain things as clearly as possible in this Privacy Policy, every time any of these terms are
+              referenced, are strictly defined as:
+            </p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Cookie:</strong> Small amount of data saved by your browser to remember you.</li>
+              <li><strong>Company:</strong> Refers to BuildrHub, the party responsible for your information.</li>
+              <li><strong>Country:</strong> Canada.</li>
+              <li><strong>Customer:</strong> The person or organization using our Service.</li>
+              <li><strong>Device:</strong> Any internet-connected device (phone, tablet, computer).</li>
+              <li><strong>Service:</strong> Refers to the BuildrHub services described on this site.</li>
+              <li><strong>Third-party service:</strong> Advertisers or partners that support our content or services.</li>
+              <li><strong>Website:</strong> BuildrHub's website at buildrhub.com.</li>
+              <li><strong>You:</strong> A user or customer of BuildrHub.</li>
+            </ul>
+          </section>
 
-        <h2 className="text-2xl font-bold mt-10 mb-4">Cookies and Tracking Technologies</h2>
-        <p className="mb-4">
-          We use cookies to enhance your browsing experience. By continuing to use our website, you consent to the use of cookies.
-          You can manage your cookie preferences through your browser settings.
-        </p>
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">Information We Collect</h2>
+            <p>We collect information when you register, place an order, subscribe, or fill out a form:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Name / Username</li>
+              <li>Email Addresses</li>
+              <li>Password</li>
+              <li>Billing Addresses</li>
+              <li>Payment Information</li>
+              <li>Usage Data</li>
+            </ul>
+          </section>
 
-        <h2 className="text-2xl font-bold mt-10 mb-4">Data Security</h2>
-        <p className="mb-4">
-          We take data security seriously and implement reasonable measures to protect your personal information. However, no
-          transmission over the internet is completely secure. Therefore, we cannot guarantee its absolute security.
-        </p>
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">How We Use Your Information</h2>
+            <p>We use your data to:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Operate and maintain our website</li>
+              <li>Improve and personalize your experience</li>
+              <li>Understand how users interact with the site</li>
+              <li>Develop new features and services</li>
+              <li>Communicate updates, support, or promotional content</li>
+              <li>Send emails</li>
+              <li>Prevent fraud</li>
+              <li>Process payments and refunds</li>
+            </ul>
+          </section>
 
-        <h2 className="text-2xl font-bold mt-10 mb-4">Your Rights</h2>
-        <p className="mb-4">
-          You have the right to access, update, or delete your personal information. If you wish to exercise these rights, please
-          contact us at{" "}
-          <a href="mailto:contact@buildrhub.io" className="text-blue-500 underline">
-            contact@buildrhub.io
-          </a>.
-        </p>
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">Log Files</h2>
+            <p>
+              We log visits to our site for analytics and security. Logged info includes IPs, browser type, ISP,
+              timestamps, and referral pages — none of which are linked to personal identities.
+            </p>
+          </section>
 
-        <h2 className="text-2xl font-bold mt-10 mb-4">Changes to This Policy</h2>
-        <p className="mb-4">
-          We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective
-          date. We encourage you to review this policy periodically.
-        </p>
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">Cookies and Web Beacons</h2>
+            <p>
+              We use cookies to improve your experience and remember your preferences. This helps us tailor content to
+              you based on your browser type or prior visits.
+            </p>
+          </section>
 
-        <p className="mt-10">
-          If you have any questions about this Privacy Policy, please contact us at{" "}
-          <a href="mailto:contact@buildrhub.io" className="text-blue-500 underline">
-            contact@buildrhub.io
-          </a>.
-        </p>
-      </section>
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">Third-Party Privacy Policies</h2>
+            <p>
+              Our Privacy Policy does not apply to third-party sites or advertisers. Check their policies for more
+              details on their practices and how to opt-out.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">GDPR Data Protection Rights</h2>
+            <p>You have the right to:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Access:</strong> Request copies of your personal data.</li>
+              <li><strong>Rectification:</strong> Request corrections or completions.</li>
+              <li><strong>Erasure:</strong> Request deletion of your data.</li>
+              <li><strong>Restrict Processing:</strong> Request limited use of your data.</li>
+              <li><strong>Object to Processing:</strong> Oppose how we use your data.</li>
+              <li><strong>Data Portability:</strong> Transfer your data to another provider.</li>
+            </ul>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">Changes to This Privacy Policy</h2>
+            <p>
+              We may update this Privacy Policy at any time. All updates will be posted here and take effect
+              immediately.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-2xl font-semibold tracking-tight">Contact Us</h2>
+            <p>For questions or suggestions, contact us at:</p>
+            <div className="pt-2">
+              <p>
+                Email:{" "}
+                <a href="mailto:contact@buildrhub.io" className="text-primary hover:underline">
+                  contact@buildrhub.io
+                </a>
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <div className="border-t pt-6">
+          <Link to="/" className="text-primary hover:underline">
+            Return to Home
+          </Link>
+        </div>
+      </div>
     </div>
   );
-};
-
-export default PrivacyPolicy;
+}

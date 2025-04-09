@@ -130,9 +130,6 @@ const ServicesPage = () => {
                     Book Free Consultation{" "}
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
-                  <Button size="lg" variant="outline" className="gap-1 hover:scale-105 transition-transform">
-                    See Examples
-                  </Button>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
@@ -792,9 +789,6 @@ const ServicesPage = () => {
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button size="lg" className="gap-1 hover:scale-105 transition-transform">
                     Book Free Consultation <ArrowRight className="h-4 w-4" />
-                  </Button>
-                  <Button size="lg" variant="outline" className="gap-1 hover:scale-105 transition-transform">
-                    See Examples
                   </Button>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
