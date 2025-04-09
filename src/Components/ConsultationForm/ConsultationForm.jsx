@@ -25,10 +25,10 @@ import {
   SelectValue,
   SelectContent,
   SelectItem
-} from "@/components/ui/select"
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
+} from "@/Components/ui/select"
+import { Popover, PopoverTrigger, PopoverContent } from "@/Components/ui/popover"
 import { CalendarIcon, Loader2, X } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/Components/ui/card"
 import { cn } from "@/lib/utils"
 
 // ✅ Updated validation schema
