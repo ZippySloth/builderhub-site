@@ -44,7 +44,8 @@ const CookiesConsent = () => {
     setPreferences(newPrefs)
     setShowConsent(false)
     setShowPreferences(false)
-    setShowSettingsButton(false) // This will hide the settings button
+    setShowSettingsButton(false)
+    window.location.reload() // Optional: forces scripts to re-eval
   }
 
   const handleRejectAll = () => {
@@ -58,20 +59,28 @@ const CookiesConsent = () => {
     setPreferences(newPrefs)
     setShowConsent(false)
     setShowPreferences(false)
-    setShowSettingsButton(false) // This will hide the settings button
+    setShowSettingsButton(false)
+    window.location.reload()
   }
 
   const handleSavePreferences = () => {
     savePreferences(preferences)
     setShowConsent(false)
     setShowPreferences(false)
-    setShowSettingsButton(false) // This will hide the settings button
+    setShowSettingsButton(false)
+    window.location.reload()
   }
 
   const savePreferences = (prefs) => {
     localStorage.setItem("buildrhub-cookie-consent", "true")
     localStorage.setItem("buildrhub-cookie-preferences", JSON.stringify(prefs))
-    // Here you'd implement logic to actually manage cookies
+
+    // 🔌 Connect to AnalyticsScripts
+    if (prefs.analytics) {
+      localStorage.setItem("analytics_consent", "true")
+    } else {
+      localStorage.removeItem("analytics_consent")
+    }
   }
 
   const handleTogglePreference = (key) => {

@@ -14,11 +14,15 @@ import Joinus from './Components/Joinus/Joinus';
 import RedditDatabase from './Pages/RedditDatabase'; // Ensure this import is present
 import ScrollToTop from './ScrollToTop';
 import CookiesConsent from "@/Components/CookiesConsent/CookiesConsent";
+import { AnalyticsScripts } from "./Components/AnalyticsScripts"
+
 
 const App = () => {
   return (
+    
     <ThemeProvider>
       <CookiesConsent />
+      <AnalyticsScripts />
       <Router>
         <Layout>
         <ScrollToTop />
