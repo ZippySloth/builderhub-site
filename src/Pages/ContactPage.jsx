@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Textarea } from '@/Components/ui/textarea';
 import { Button } from '@/Components/ui/button';
+import { Mail } from 'lucide-react'; // Import the Mail icon from lucide-react
 
 const ContactPage = () => {
   return (
@@ -16,7 +17,7 @@ const ContactPage = () => {
             Get in Touch
           </h2>
           <p className="text-muted-foreground text-md max-w-xl mx-auto">
-            Have a question, proposal, or just want to say hi? We’d love to hear from you.
+            Have a question, proposal, or just want to say hi? We'd love to hear from you.
           </p>
         </div>
 
@@ -44,6 +45,12 @@ const ContactPage = () => {
             </form>
           </CardContent>
         </Card>
+        <div className="flex items-center justify-center gap-2 text-primary pt-12">
+            <Mail className="h-5 w-5" />
+            <a href="mailto:contact@buildrhub.io" className="hover:underline">
+              contact@buildrhub.io
+            </a>
+          </div>
       </div>
     </section>
   );
