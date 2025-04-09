@@ -1,16 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/Components/ui/button"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription
-} from "@/components/ui/dialog"
-import { Switch } from "@/components/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+} from "@/Components/ui/dialog"
+import { Switch } from "@/Components/ui/switch"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/Components/ui/tabs"
 
 const CookiesConsent = () => {
   const [showConsent, setShowConsent] = useState(false)

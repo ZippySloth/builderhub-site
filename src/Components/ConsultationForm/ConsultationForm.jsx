@@ -7,8 +7,8 @@ import * as z from "zod"
 import { format } from "date-fns"
 import { supabase } from "../../supabaseClient"
 
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+import { Button } from "@/Components/ui/button"
+import { Calendar } from "@/Components/ui/calendar"
 import {
   Form,
   FormControl,
@@ -16,9 +16,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/Components/ui/form"
+import { Input } from "@/Components/ui/input"
+import { Textarea } from "@/Components/ui/textarea"
 import {
   Select,
   SelectTrigger,
