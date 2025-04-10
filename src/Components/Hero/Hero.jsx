@@ -36,7 +36,7 @@ const Hero = () => {
               </Button>
 
               <Button size="lg" variant="outline" className="gap-1" onClick={() => navigate('/viral')}>
-  Access Database <Database className="h-4 w-4" />
+  Access all Database <Database className="h-4 w-4" />
 </Button>
             </div>
           </div>
