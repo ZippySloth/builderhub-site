@@ -8,8 +8,10 @@ import { useTheme } from "../../context/ThemeContext";
 const Hero = () => {
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
-  
+
   console.log("✅ Redeploy test");
+  console.log("✅ Trigger redeploy");
+
 
 
   return (
