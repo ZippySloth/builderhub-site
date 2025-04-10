@@ -30,9 +30,9 @@ const Hero = () => {
                 Explore Services <ArrowRight className="h-4 w-4" />
               </Button>
 
-              <Button size="lg" variant="outline" className="gap-1">
-                Access Database <Database className="h-4 w-4" />
-              </Button>
+              <Button size="lg" variant="outline" className="gap-1" onClick={() => navigate('/viral')}>
+  Access Database <Database className="h-4 w-4" />
+</Button>
             </div>
           </div>
           <div className="mx-auto aspect-video w-full max-w-[600px] overflow-hidden rounded-xl border bg-muted/50 p-2">
