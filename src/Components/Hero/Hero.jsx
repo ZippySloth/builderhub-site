@@ -9,11 +9,6 @@ const Hero = () => {
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
 
-  console.log("✅ Redeploy test");
-  console.log("✅ Trigger redeploy");
-
-
-
   return (
     <section className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 px-5 lg:px-8 xl:px-[8%]">
       <div className="absolute inset-0 z-0">

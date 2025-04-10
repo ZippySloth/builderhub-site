@@ -16,7 +16,7 @@ import ScrollToTop from './ScrollToTop';
 import CookiesConsent from "@/Components/CookiesConsent/CookiesConsent";
 import { AnalyticsScripts } from "./Components/AnalyticsScripts"
 
-console.log("✅ Trigger redeploy: test log");
+console.log("✅ Vercel auto-deploy test");
 
 
 const App = () => {
