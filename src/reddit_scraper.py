@@ -117,4 +117,4 @@ def run_scraper():
 
 # Main Execution
 if __name__ == "__main__":
-    run_scraper()s
+    run_scraper()

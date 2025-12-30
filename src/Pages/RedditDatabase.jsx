@@ -61,15 +61,17 @@ const RedditDatabasePage = () => {
     const fetchContent = async () => {
       setIsLoading(true);
       try {
+        // FIXED: Changed 'created_at' to 'published_at'
         const { data, error } = await supabase
           .from('posts')
           .select('*')
-          .order('created_at', { ascending: false });
+          .order('published_at', { ascending: false });
 
         if (error) throw error;
 
-        const uniquePosts = data.reduce((acc, post) => {
-          if (!acc.some(p => p.link === post.link)) {
+        // FIXED: Using 'permalink' instead of 'link' to match scraper schema
+        const uniquePosts = (data || []).reduce((acc, post) => {
+          if (!acc.some(p => p.permalink === post.permalink)) {
             acc.push(post);
           }
           return acc;
@@ -77,7 +79,7 @@ const RedditDatabasePage = () => {
 
         setTechContent(uniquePosts);
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error('❌ Error fetching posts:', error.message);
       } finally {
         setIsLoading(false);
       }
@@ -88,22 +90,14 @@ const RedditDatabasePage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 300) {
-        setShowScrollButton(true);
-      } else {
-        setShowScrollButton(false);
-      }
+      setShowScrollButton(window.scrollY > 300);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const filteredContent = () => {
@@ -112,9 +106,9 @@ const RedditDatabasePage = () => {
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       results = results.filter(item => 
-        item.title.toLowerCase().includes(query) || 
-        (item.subreddit && item.subreddit.toLowerCase().includes(query)) ||
-        (item.description && item.description.toLowerCase().includes(query))
+        item.title?.toLowerCase().includes(query) || 
+        item.subreddit?.toLowerCase().includes(query) ||
+        item.description?.toLowerCase().includes(query)
       );
     }
     
@@ -130,10 +124,12 @@ const RedditDatabasePage = () => {
     
     switch(sortBy) {
       case "popular":
-        return [...results].sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+        // FIXED: Using 'rank_hint' as the popularity metric
+        return [...results].sort((a, b) => (b.rank_hint || 0) - (a.rank_hint || 0));
       case "newest":
       default:
-        return [...results].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        // FIXED: Sorting logic uses 'published_at'
+        return [...results].sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
     }
   };
 
@@ -141,144 +137,107 @@ const RedditDatabasePage = () => {
     if (categoryId === "all") return techContent.length;
     const category = CATEGORIES.find(c => c.id === categoryId);
     return techContent.filter(post => 
-      category.subreddits.includes(post.subreddit.toLowerCase())
+      post.subreddit && category.subreddits.includes(post.subreddit.toLowerCase())
     ).length;
   };
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground animate-pulse-slow">
-              Daily Updates
+            <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
+              Trendbase Explorer
             </div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Explore the Trendbase</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">The Full Viral Feed</h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl">
-              Search and filter the most viral Reddit posts in AI, business, markets, marketing, and personal growth — updated daily.
+              Deep dive into historical trends across {techContent.length} analyzed posts.
             </p>
           </div>
         </div>
 
         <div className="mx-auto w-full max-w-7xl py-12 px-4">
-          <div className="mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="flex flex-col md:flex-row gap-4 w-full">
-              <Tabs defaultValue={activeTab} className="w-full">
-                <TabsList className="flex-wrap h-auto">
-                  <TabsTrigger 
-                    value="all" 
-                    onClick={() => setActiveTab("all")}
-                    className="transition-all hover:bg-primary/10 hover:text-primary"
-                  >
-                    All Posts ({techContent.length})
+          <div className="mb-6 flex flex-col lg:flex-row gap-4 items-center justify-between">
+            <Tabs defaultValue={activeTab} className="w-full lg:w-auto">
+              <TabsList className="flex-wrap h-auto bg-muted/50">
+                <TabsTrigger value="all" onClick={() => setActiveTab("all")}>
+                  All ({techContent.length})
+                </TabsTrigger>
+                {CATEGORIES.map((cat) => (
+                  <TabsTrigger key={cat.id} value={cat.id} onClick={() => setActiveTab(cat.id)}>
+                    {cat.name} ({getPostCountForCategory(cat.id)})
                   </TabsTrigger>
-                  {CATEGORIES.map((category) => (
-                    <TabsTrigger
-                      key={category.id}
-                      value={category.id}
-                      onClick={() => setActiveTab(category.id)}
-                      className="transition-all hover:bg-primary/10 hover:text-primary"
-                    >
-                      {category.name} ({getPostCountForCategory(category.id)})
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-              </Tabs>
-            </div>
+                ))}
+              </TabsList>
+            </Tabs>
             
-            <div className="flex gap-4 w-full md:w-auto">
+            <div className="flex gap-3 w-full lg:w-auto">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" className="gap-2 w-full md:w-[140px]">
-                    {sortBy === "newest" ? (
-                      <>
-                        <Clock className="h-4 w-4" />
-                        Newest
-                      </>
-                    ) : (
-                      <>
-                        <Flame className="h-4 w-4" />
-                        Popular
-                      </>
-                    )}
+                  <Button variant="outline" className="gap-2 shrink-0">
+                    {sortBy === "newest" ? <Clock className="h-4 w-4" /> : <Flame className="h-4 w-4" />}
+                    {sortBy === "newest" ? "Newest" : "Popular"}
                     <ChevronDown className="h-4 w-4 opacity-50" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => setSortBy("newest")}>
-                    <Clock className="mr-2 h-4 w-4" />
-                    <span>Newest</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setSortBy("popular")}>
-                    <Flame className="mr-2 h-4 w-4" />
-                    <span>Popular</span>
-                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSortBy("newest")}>Newest</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setSortBy("popular")}>Popular</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               
               <Input
-                placeholder="Search all posts..."
-                className="w-full md:w-64"
+                placeholder="Search keywords..."
+                className="max-w-md"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
           </div>
 
-          <div className="mb-4 text-sm text-muted-foreground">
-            Showing: {filteredContent().length} posts | {activeTab !== "all" ? `${CATEGORIES.find(c => c.id === activeTab)?.name} posts` : "All posts"}
-          </div>
-
           {isLoading ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {[...Array(6)].map((_, i) => (
-                <Card key={i} className="overflow-hidden animate-pulse">
-                  <CardHeader className="pb-2">
-                    <div className="h-6 w-1/3 rounded bg-muted" />
-                    <div className="h-6 w-full rounded bg-muted mt-2" />
-                  </CardHeader>
-                  <CardContent className="pb-2">
-                    <div className="h-16 w-full rounded bg-muted" />
-                  </CardContent>
-                  <CardFooter className="flex items-center justify-between">
-                    <div className="h-4 w-1/4 rounded bg-muted" />
-                    <div className="h-8 w-20 rounded bg-muted" />
-                  </CardFooter>
-                </Card>
+                <div key={i} className="h-64 rounded-xl bg-muted animate-pulse" />
               ))}
             </div>
           ) : (
             <>
               {filteredContent().length === 0 ? (
-                <div className="text-center py-12 text-muted-foreground">
-                  {searchQuery ? "No matching posts found" : "No posts available"}
+                <div className="text-center py-20 text-muted-foreground bg-muted/20 rounded-xl">
+                  {searchQuery ? `No results found for "${searchQuery}"` : "Database is currently empty."}
                 </div>
               ) : (
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {filteredContent().map((item) => (
-                    <Card key={item.id} className="overflow-hidden hover:shadow-md transition-shadow">
+                    <Card key={item.reddit_post_id} className="overflow-hidden hover:shadow-lg transition-all border-muted/50">
                       <CardHeader className="pb-2">
-                        <div className="flex items-center gap-2">
-                          <Badge variant="outline">{item.subreddit || 'reddit'}</Badge>
-                          <div className="text-xs text-muted-foreground">
-                            {dayjs(item.created_at).fromNow()}
+                        <div className="flex items-center justify-between">
+                          <Badge variant="secondary" className="font-mono text-[10px]">
+                            r/{item.subreddit}
+                          </Badge>
+                          <div className="text-xs text-muted-foreground flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            {dayjs(item.published_at).fromNow()}
                           </div>
                         </div>
-                        <CardTitle className="line-clamp-2 text-lg">{item.title}</CardTitle>
+                        <CardTitle className="line-clamp-2 text-lg leading-tight mt-2">
+                          {item.title}
+                        </CardTitle>
                       </CardHeader>
-                      <CardContent className="pb-2">
+                      <CardContent className="pb-4">
                         <p className="line-clamp-3 text-sm text-muted-foreground">
-                          {item.description || "No description available."}
+                          {item.description || "View full discussion on Reddit."}
                         </p>
                       </CardContent>
-                      <CardFooter className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Zap className="h-4 w-4 text-yellow-500" /> {item.upvotes || 0} upvotes
+                      <CardFooter className="flex items-center justify-between pt-0 border-t border-muted/30 mt-auto">
+                        <div className="flex items-center gap-2 text-sm font-medium text-yellow-600 dark:text-yellow-500">
+                          <Zap className="h-4 w-4" /> 
+                          {item.rank_hint || 0}
                         </div>
-                        <Button variant="ghost" size="sm" className="gap-1 group" asChild>
-                          <a href={item.link} target="_blank" rel="noopener noreferrer">
-                            Read more
-                            <ExternalLink className="h-3 w-3 group-hover:translate-x-0.5 transition-transform" />
+                        <Button variant="ghost" size="sm" className="gap-1" asChild>
+                          <a href={item.permalink} target="_blank" rel="noopener noreferrer">
+                            Visit Post <ExternalLink className="h-3 w-3" />
                           </a>
                         </Button>
                       </CardFooter>
@@ -291,13 +250,11 @@ const RedditDatabasePage = () => {
         </div>
       </div>
 
-      {/* Scroll to top button */}
       {showScrollButton && (
         <Button
           onClick={scrollToTop}
           size="icon"
-          className="fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full shadow-lg transition-all hover:scale-110"
-          aria-label="Scroll to top"
+          className="fixed bottom-8 right-8 z-50 rounded-full shadow-2xl animate-in fade-in slide-in-from-bottom-4"
         >
           <ArrowUp className="h-5 w-5" />
         </Button>

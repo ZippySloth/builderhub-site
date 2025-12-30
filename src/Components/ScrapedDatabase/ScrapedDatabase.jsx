@@ -52,30 +52,40 @@ const CATEGORIES = [
 const ScrapedDatabase = () => {
   const [activeTab, setActiveTab] = useState("ai");
   const [techContent, setTechContent] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchContent = async () => {
+      setLoading(true);
+      // We use 'published_at' as the sorting column because 'created_at' 
+      // does not exist in your table schema.
       const { data, error } = await supabase
         .from("posts")
         .select("*")
-        .order("created_at", { ascending: false });
-      
+        .order("published_at", { ascending: false });
+
+      console.log("📦 Data received:", data);
+
       if (error) {
-        console.error("❌ Supabase fetch error:", error);
+        console.error("❌ Supabase fetch error:", error.message);
       } else {
-        setTechContent(data);
+        setTechContent(data || []);
       }
+      setLoading(false);
     };
     fetchContent();
   }, []);
 
   const getPostsForCategory = (categoryId) => {
     const category = CATEGORIES.find(c => c.id === categoryId);
-    if (!category) return [];
-    
+    if (!category || !techContent) return [];
+
     return techContent
-      .filter(item => category.subreddits.includes(item.subreddit?.toLowerCase()))
-      .slice(0, 3); // Limit to 3 posts per category
+      .filter(item => 
+        item.subreddit && 
+        category.subreddits.includes(item.subreddit.toLowerCase())
+      )
+      .slice(0, 3);
   };
 
   return (
@@ -83,14 +93,14 @@ const ScrapedDatabase = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground animate-pulse-slow">
+            <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
               Daily Updates
             </div>
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-            BuildrHub Trendbase
+              BuildrHub Trendbase
             </h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl">
-            Access Reddit’s most viral tech, business, and growth content — updated daily.
+              Access Reddit’s most viral tech, business, and growth content — updated daily.
             </p>
           </div>
         </div>
@@ -102,7 +112,7 @@ const ScrapedDatabase = () => {
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
-                  className="transition-all hover:bg-primary/10"
+                  className="transition-all"
                   onClick={() => setActiveTab(category.id)}
                 >
                   {category.name}
@@ -110,51 +120,65 @@ const ScrapedDatabase = () => {
               ))}
             </TabsList>
 
-            {CATEGORIES.map((category) => (
-              <TabsContent key={category.id} value={category.id} className="mt-6">
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {getPostsForCategory(category.id).map((item) => (
-                    <Card key={item.id} className="overflow-hidden card-hover">
-                      <CardHeader className="pb-2">
-                        <div className="flex items-center gap-2">
-                          <Badge variant="outline">{item.subreddit}</Badge>
-                          <div className="text-xs text-muted-foreground">
-                            {dayjs(item.created_at).fromNow()}
-                          </div>
-                        </div>
-                        <CardTitle className="line-clamp-2 text-lg">
-                          {item.title}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="pb-2">
-                        <p className="line-clamp-3 text-sm text-muted-foreground">
-                          {item.description || "No description available."}
-                        </p>
-                      </CardContent>
-                      <CardFooter className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Zap className="h-4 w-4 text-yellow-500" />
-                          {item.upvotes} upvotes
-                        </div>
-                        <a
-                          href={item.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm font-medium text-primary hover:underline flex items-center gap-1"
-                        >
-                          Read more
-                          <ExternalLink className="h-3 w-3" />
-                        </a>
-                      </CardFooter>
-                    </Card>
-                  ))}
-                </div>
-              </TabsContent>
-            ))}
+            {loading ? (
+              <div className="py-20 text-center text-muted-foreground">Loading trends...</div>
+            ) : (
+              CATEGORIES.map((category) => {
+                const posts = getPostsForCategory(category.id);
+                return (
+                  <TabsContent key={category.id} value={category.id} className="mt-6">
+                    {posts.length === 0 ? (
+                      <p className="py-12 text-center text-muted-foreground">
+                        No recent posts found for {category.name}.
+                      </p>
+                    ) : (
+                      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {posts.map((item) => (
+                          <Card key={item.reddit_post_id} className="overflow-hidden card-hover">
+                            <CardHeader className="pb-2">
+                              <div className="flex items-center gap-2">
+                                <Badge variant="outline">{item.subreddit}</Badge>
+                                <div className="text-xs text-muted-foreground">
+                                  {/* Using published_at to match your database schema */}
+                                  {dayjs(item.published_at).fromNow()}
+                                </div>
+                              </div>
+                              <CardTitle className="line-clamp-2 text-lg">
+                                {item.title}
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent className="pb-2">
+                              <p className="line-clamp-3 text-sm text-muted-foreground">
+                                {item.description || "View full post on Reddit."}
+                              </p>
+                            </CardContent>
+                            <CardFooter className="flex items-center justify-between">
+                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <Zap className="h-4 w-4 text-yellow-500" />
+                                {item.rank_hint || 0} trending rank
+                              </div>
+                              <a
+                                href={item.permalink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-sm font-medium text-primary hover:underline flex items-center gap-1"
+                              >
+                                Read more
+                                <ExternalLink className="h-3 w-3" />
+                              </a>
+                            </CardFooter>
+                          </Card>
+                        ))}
+                      </div>
+                    )}
+                  </TabsContent>
+                );
+              })
+            )}
 
             <div className="mt-8 flex justify-center">
               <Link to="/viral">
-                <Button size="lg" className="gap-1 hover:scale-105 transition-transform">
+                <Button size="lg" className="gap-1">
                   Access Full Database <Database className="h-4 w-4" />
                 </Button>
               </Link>
