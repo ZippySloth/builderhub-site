@@ -7,6 +7,7 @@ import logoWhite from '../../assets/logo_white.png';
 const NAV_LINKS = [
   { label: 'Services', href: '/#services' },
   { label: 'How It Works', href: '/#how-it-works' },
+  { label: 'AI Agents', href: '/#agents' },
   { label: 'About', href: '/#about' },
   { label: 'FAQ', href: '/#faq' },
 ];
