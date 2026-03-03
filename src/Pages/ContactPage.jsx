@@ -1,144 +1,175 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/card';
-import { Input } from '@/Components/ui/input';
-import { Textarea } from '@/Components/ui/textarea';
-import { Button } from '@/Components/ui/button';
-import { Mail } from 'lucide-react';
-import { supabase } from '@/supabaseClient'; // Import your Supabase client
+import { supabase } from '../supabaseClient';
+import { useReveal } from '../hooks/useReveal';
 
 const ContactPage = () => {
+  const [ref, visible] = useReveal();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    company: '',
+    tools: '',
+    challenge: '',
+    source: '',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [id]: value
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitError('');
-    
-    try {
-      const { data, error } = await supabase
-        .from('contact_form')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            message: formData.message,
-            created_at: new Date().toISOString()
-          }
-        ])
-        .select();
+    setLoading(true);
+    setError('');
 
-      if (error) throw error;
-      
-      setSubmitSuccess(true);
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitError(error.message || 'Failed to submit form. Please try again.');
+    try {
+      const { error: supaError } = await supabase
+        .from('audit_requests')
+        .insert([formData]);
+
+      if (supaError) throw supaError;
+      setSuccess(true);
+      setFormData({ name: '', email: '', company: '', tools: '', challenge: '', source: '' });
+    } catch (err) {
+      setError('Something went wrong. Please try again or email us directly.');
+      console.error(err);
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
   return (
-    <section className="w-full py-16 md:py-24 lg:py-32">
-      <div className="container max-w-2xl px-4 md:px-6 mx-auto">
-        <div className="text-center space-y-4 mb-10">
-          <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground animate-pulse-slow">
-            Let's Talk
+    <section className="py-20 md:py-28 lg:py-32 min-h-screen">
+      <div ref={ref} className={`reveal ${visible ? 'visible' : ''}`}>
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Book a Data Audit
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Tell me about your situation. I'll review and reach out within 24 hours.
+            </p>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Get in Touch
-          </h2>
-          <p className="text-muted-foreground text-md max-w-xl mx-auto">
-            Have a question, proposal, or just want to say hi? We'd love to hear from you.
-          </p>
-        </div>
 
-        <Card className="shadow-lg border border-border">
-          <CardHeader>
-            <CardTitle>Contact Form</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {submitSuccess ? (
-              <div className="text-center p-6">
-                <div className="text-green-600 font-medium mb-4">
-                  Thank you for your message! We'll get back to you soon.
-                </div>
-                <Button 
-                  onClick={() => setSubmitSuccess(false)}
-                  className="w-full"
-                >
-                  Send another message
-                </Button>
+          {success ? (
+            <div className="bg-card border border-accent/30 rounded-xl p-8 text-center">
+              <div className="text-4xl mb-4">✓</div>
+              <h2 className="text-xl font-bold text-foreground mb-2">Request received</h2>
+              <p className="text-muted-foreground">
+                Got it. I'll review your situation and reach out within 24 hours to schedule a call.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">Name *</label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="name">Name</label>
-                  <Input 
-                    id="name" 
-                    placeholder="Your name" 
-                    required 
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="email">Email</label>
-                  <Input 
-                    id="email" 
-                    type="email" 
-                    placeholder="you@example.com" 
-                    required 
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1" htmlFor="message">Message</label>
-                  <Textarea 
-                    id="message" 
-                    rows="5" 
-                    placeholder="What can we help you with?" 
-                    required 
-                    value={formData.message}
-                    onChange={handleChange}
-                  />
-                </div>
-                {submitError && (
-                  <div className="text-red-600 text-sm">{submitError}</div>
-                )}
-                <Button 
-                  type="submit" 
-                  className="w-full" 
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </Button>
-              </form>
-            )}
-          </CardContent>
-        </Card>
-        <div className="flex items-center justify-center gap-2 text-primary pt-12">
-          <Mail className="h-5 w-5" />
-          <a href="mailto:contact@buildrhub.io" className="hover:underline">
-            contact@buildrhub.io
-          </a>
+
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">Email *</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                />
+              </div>
+
+              {/* Company */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">Company *</label>
+                <input
+                  type="text"
+                  name="company"
+                  required
+                  value={formData.company}
+                  onChange={handleChange}
+                  className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                />
+              </div>
+
+              {/* Tools */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  What tools do you use?
+                </label>
+                <textarea
+                  name="tools"
+                  rows={3}
+                  value={formData.tools}
+                  onChange={handleChange}
+                  placeholder="e.g. Stripe, HubSpot, QuickBooks, Postgres..."
+                  className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all resize-none"
+                />
+              </div>
+
+              {/* Challenge */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  What's your biggest data challenge?
+                </label>
+                <textarea
+                  name="challenge"
+                  rows={3}
+                  value={formData.challenge}
+                  onChange={handleChange}
+                  className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all resize-none"
+                />
+              </div>
+
+              {/* Source */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  How did you hear about BuilderHub?{' '}
+                  <span className="text-muted-foreground font-normal">(optional)</span>
+                </label>
+                <input
+                  type="text"
+                  name="source"
+                  value={formData.source}
+                  onChange={handleChange}
+                  className="w-full bg-card border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                />
+              </div>
+
+              {error && (
+                <p className="text-sm text-destructive">{error}</p>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Submitting...' : 'Request an Audit'}
+              </button>
+            </form>
+          )}
+
+          <p className="text-center text-sm text-muted-foreground mt-8">
+            Prefer email?{' '}
+            <a
+              href="mailto:fazio@buildrhub.io"
+              className="text-primary hover:text-blue-400 transition-colors"
+            >
+              fazio@buildrhub.io
+            </a>
+          </p>
         </div>
       </div>
     </section>
