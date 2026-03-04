@@ -2,47 +2,39 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../../data/blogPosts';
 import { Badge } from '@/Components/ui/badge';
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from '@/Components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription } from '@/Components/ui/card';
 import { Button } from '@/Components/ui/button';
 import { ArrowRight } from 'lucide-react';
 
 const BlogSection = () => {
-  const latestPosts = [...blogPosts].reverse().slice(0, 3);
+  const posts = [...blogPosts].reverse().slice(0, 3);
 
   return (
-    <section id="blog" className="py-12 md:py-20 lg:py-28 bg-muted/30">
+    <section id="blog" className="py-14 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 md:mb-10">
+        <div className="flex items-end justify-between gap-4 mb-8">
           <div>
             <Badge variant="outline" className="mb-3">Blog</Badge>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
-              Data insights
-            </h2>
-            <p className="text-muted-foreground mt-1">
-              Practical guides for companies making sense of their data.
-            </p>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Insights</h2>
           </div>
-          <Button variant="outline" asChild className="shrink-0">
-            <Link to="/blog">All posts <ArrowRight className="ml-2 h-4 w-4" /></Link>
+          <Button variant="ghost" size="sm" asChild>
+            <Link to="/blog">All posts <ArrowRight className="ml-1 h-3 w-3" /></Link>
           </Button>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {latestPosts.map((post) => (
-            <Card key={post.slug} className="flex flex-col">
-              <CardHeader className="flex-1">
-                <div className="flex flex-wrap gap-1.5 mb-2">
-                  {post.tags.map(t => <Badge key={t} variant="secondary" className="text-xs">{t}</Badge>)}
-                </div>
-                <CardTitle className="text-base leading-snug">{post.title}</CardTitle>
-                <CardDescription className="text-sm leading-relaxed">{post.excerpt}</CardDescription>
-              </CardHeader>
-              <CardFooter className="mt-auto pt-3 border-t">
-                <Button size="sm" variant="ghost" asChild className="gap-1 -ml-2">
-                  <Link to={`/blog/${post.slug}`}>Read more <ArrowRight className="h-3 w-3" /></Link>
-                </Button>
-              </CardFooter>
-            </Card>
+        <div className="grid md:grid-cols-3 gap-4">
+          {posts.map((p) => (
+            <Link key={p.slug} to={`/blog/${p.slug}`}>
+              <Card className="h-full hover:border-primary/40 transition-colors">
+                <CardHeader>
+                  <div className="flex gap-1.5 mb-2">
+                    {p.tags.slice(0, 2).map(t => <Badge key={t} variant="secondary" className="text-[10px]">{t}</Badge>)}
+                  </div>
+                  <CardTitle className="text-sm leading-snug">{p.title}</CardTitle>
+                  <CardDescription className="text-xs line-clamp-2">{p.excerpt}</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>

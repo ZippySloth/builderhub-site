@@ -1,97 +1,70 @@
 import React from 'react';
 import { Badge } from '@/Components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/Components/ui/card';
-import { ArrowRight, TrendingUp } from 'lucide-react';
+import { Card, CardContent } from '@/Components/ui/card';
+import { TrendingUp, ArrowRight } from 'lucide-react';
 import { Button } from '@/Components/ui/button';
 
 const dashboards = [
-  { title: 'Revenue Dashboard', desc: 'MRR, churn, new vs. expansion, cohort LTV — updated hourly', tags: ['SaaS', 'Finance'] },
-  { title: 'Marketing Attribution', desc: 'Channel performance, CAC by source, first-touch vs. last-touch', tags: ['Marketing', 'Growth'] },
-  { title: 'Operations KPIs', desc: 'Ticket volume, SLA compliance, team utilization, escalation rate', tags: ['Ops', 'Support'] },
+  { title: 'Revenue Dashboard', desc: 'MRR, churn, expansion, cohort LTV' },
+  { title: 'Marketing Attribution', desc: 'CAC by channel, first-touch vs last-touch' },
+  { title: 'Operations KPIs', desc: 'Ticket volume, SLA, utilization' },
 ];
 
-const caseStudies = [
+const cases = [
   {
-    label: 'Series B SaaS',
-    problem: 'Board asked for ARR, NRR, cohort data, and CAC payback. Team was pulling everything from 4 spreadsheets the night before every board meeting.',
-    built: 'Unified data pipeline from Stripe + HubSpot + Intercom → automated weekly KPI report + live board dashboard.',
-    result: '12 hours of manual reporting eliminated per week. Board prep went from 1 day to 30 minutes.',
-    time: '3 weeks to live',
+    type: 'Series B SaaS',
+    problem: 'Board wanted ARR, NRR, and cohorts. Team spent 2 days before every meeting pulling from 4 spreadsheets.',
+    result: 'Board prep: 2 days → 30 minutes. 12 hours/week saved.',
+    time: '3 weeks',
   },
   {
-    label: 'Post-Acquisition SMB',
-    problem: 'Two companies merged. Two CRMs, two billing systems, two reporting cadences. Investors wanted one dashboard.',
-    built: 'Single consolidated data layer bridging both systems. Automated reconciliation report for finance.',
-    result: 'First unified board report delivered within 18 days of engagement start. $0 new tooling cost.',
-    time: '18 days to live',
+    type: 'Post-Acquisition',
+    problem: 'Two companies merged. Two CRMs, two billing systems. Investors wanted one dashboard.',
+    result: 'First unified report delivered in 18 days. $0 new tooling.',
+    time: '18 days',
   },
 ];
 
 const ProofSection = () => (
-  <section id="proof" className="py-12 md:py-20 lg:py-28">
+  <section id="proof" className="py-14 md:py-24">
     <div className="container mx-auto px-4 md:px-6">
 
-      {/* Dashboard previews */}
-      <div className="text-center mb-8 md:mb-10">
-        <Badge variant="outline" className="mb-4">Sample Builds</Badge>
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-3">
-          This is what we deliver.
-        </h2>
-        <p className="text-muted-foreground md:text-lg max-w-xl mx-auto">
-          Live, auto-updating dashboards built on your actual data. Here's what clients get on day one.
-        </p>
+      <div className="text-center mb-10">
+        <Badge variant="outline" className="mb-3">Results</Badge>
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">What we deliver.</h2>
       </div>
 
-      <div className="grid sm:grid-cols-3 gap-4 mb-14 md:mb-20">
+      {/* Dashboard previews */}
+      <div className="grid sm:grid-cols-3 gap-4 mb-14">
         {dashboards.map((d) => (
           <Card key={d.title} className="overflow-hidden">
-            {/* Placeholder dashboard visual */}
-            <div className="h-36 bg-gradient-to-br from-muted to-muted/50 flex items-center justify-center border-b relative overflow-hidden">
-              <div className="absolute inset-0 grid grid-cols-4 gap-px p-3 opacity-30">
-                {Array.from({ length: 16 }).map((_, i) => (
-                  <div key={i} className="rounded bg-primary" style={{ height: `${20 + (i % 5) * 12}px`, alignSelf: 'flex-end' }} />
-                ))}
-              </div>
-              <TrendingUp className="h-8 w-8 text-primary/60 relative z-10" />
+            <div className="h-28 bg-gradient-to-br from-muted to-muted/40 flex items-center justify-center border-b">
+              <TrendingUp className="h-6 w-6 text-primary/50" />
             </div>
-            <CardHeader className="pb-2">
-              <div className="flex gap-2 mb-1">
-                {d.tags.map(t => <Badge key={t} variant="secondary" className="text-xs">{t}</Badge>)}
-              </div>
-              <CardTitle className="text-base">{d.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">{d.desc}</p>
+            <CardContent className="pt-3 pb-3">
+              <p className="font-semibold text-sm">{d.title}</p>
+              <p className="text-xs text-muted-foreground">{d.desc}</p>
             </CardContent>
           </Card>
         ))}
       </div>
 
       {/* Case studies */}
-      <div className="mb-8 md:mb-10">
-        <div className="text-center mb-8">
-          <Badge variant="outline" className="mb-4">Case Studies</Badge>
-          <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl">
-            Real problems. Real results.
-          </h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          {caseStudies.map((cs) => (
-            <Card key={cs.label}>
-              <CardHeader>
-                <Badge variant="secondary" className="w-fit mb-1">{cs.label}</Badge>
-                <CardTitle className="text-base">The Problem</CardTitle>
-                <CardDescription className="text-sm leading-relaxed">{cs.problem}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
+      <div className="mb-10">
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-4 text-center">Case Studies</p>
+        <div className="grid md:grid-cols-2 gap-5">
+          {cases.map((c) => (
+            <Card key={c.type}>
+              <CardContent className="pt-5 pb-5 space-y-3">
+                <Badge variant="secondary">{c.type}</Badge>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">What We Built</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{cs.built}</p>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground mb-1">Problem</p>
+                  <p className="text-sm">{c.problem}</p>
                 </div>
-                <div className="rounded-lg bg-muted/50 p-3 border-l-2 border-l-green-500">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-1">Result</p>
-                  <p className="text-sm font-medium">{cs.result}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{cs.time}</p>
+                <div className="rounded bg-green-500/10 border-l-2 border-green-500 p-3">
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground mb-1">Result</p>
+                  <p className="text-sm font-medium">{c.result}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{c.time} to live</p>
                 </div>
               </CardContent>
             </Card>

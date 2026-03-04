@@ -4,46 +4,36 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/Components/ui/ca
 
 const personas = [
   {
-    num: '01',
-    title: 'Post-Acquisition Companies',
-    desc: 'Two companies, two CRMs, two billing systems, two sets of numbers that never match. Investors want one dashboard before the next board meeting. We unify everything — fast.',
+    title: 'Post-Acquisition',
+    desc: 'Two systems. Two sets of numbers. Investors want one dashboard before next board meeting.',
   },
   {
-    num: '02',
-    title: 'Series B SaaS Companies',
-    desc: "Your board wants ARR, NRR, CAC payback, and cohort retention. You're still pulling it manually the night before. We automate the whole thing so board prep takes 30 minutes, not a day.",
+    title: 'Series B SaaS',
+    desc: "Board wants ARR, NRR, cohorts, CAC payback. You're pulling it from spreadsheets the night before.",
   },
   {
-    num: '03',
-    title: 'Companies Evaluating a Data Hire',
-    desc: "A senior data engineer costs $120–180k, takes 3–6 months to ramp, and builds things only they can maintain. We deliver the same output in 3–6 weeks, maintain it ourselves, and cost a fraction of the price.",
+    title: 'Evaluating a Data Hire',
+    desc: '$150k salary. 6 months to ramp. Builds things only they understand. We deliver in 3 weeks.',
   },
   {
-    num: '04',
-    title: 'New Finance & Ops Leaders',
-    desc: "You just joined and inherited broken reporting — three dashboards, none of them trusted, nobody knows which is right. We map what exists, fix what's wrong, and build what's missing. In weeks.",
+    title: 'New Finance/Ops Leader',
+    desc: 'Inherited broken reporting. Three dashboards, none trusted. Need to fix it fast.',
   },
 ];
 
 const WhoItsForSection = () => (
-  <section id="who" className="py-12 md:py-20 lg:py-28 bg-muted/30">
+  <section id="who" className="py-14 md:py-24 bg-muted/30">
     <div className="container mx-auto px-4 md:px-6">
-      <div className="text-center mb-8 md:mb-12 lg:mb-14">
-        <Badge variant="outline" className="mb-4">Who We Serve</Badge>
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-3">
-          You have data. You don't have answers.
-        </h2>
-        <p className="text-muted-foreground md:text-lg max-w-2xl mx-auto">
-          If any of these sound like your company right now, we should talk.
-        </p>
+      <div className="text-center mb-10">
+        <Badge variant="outline" className="mb-3">Who This Is For</Badge>
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Sound familiar?</h2>
       </div>
-      <div className="grid md:grid-cols-2 gap-5">
-        {personas.map((p) => (
-          <Card key={p.num} className="relative overflow-hidden group hover:border-primary/40 transition-colors">
-            <span className="absolute top-4 right-4 text-6xl font-black text-muted/15 leading-none select-none group-hover:text-primary/10 transition-colors">{p.num}</span>
-            <CardHeader className="pr-16">
-              <CardTitle className="text-lg">{p.title}</CardTitle>
-              <CardDescription className="text-[0.9rem] leading-relaxed">{p.desc}</CardDescription>
+      <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+        {personas.map((p, i) => (
+          <Card key={i} className="group hover:border-primary/40 transition-colors">
+            <CardHeader>
+              <CardTitle className="text-base">{p.title}</CardTitle>
+              <CardDescription className="text-sm leading-relaxed">{p.desc}</CardDescription>
             </CardHeader>
           </Card>
         ))}

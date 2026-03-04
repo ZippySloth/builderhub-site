@@ -1,43 +1,32 @@
 import React from 'react';
 import { Badge } from '@/Components/ui/badge';
-import { Card, CardHeader, CardTitle, CardDescription } from '@/Components/ui/card';
 
-const strengths = [
-  { title: 'Finance Fluency', desc: "We think in unit economics, cohorts, and board metrics — not just data models. We build what matters to your business, not what's technically impressive." },
-  { title: 'Engineering Depth', desc: 'Production-grade data infrastructure, not spreadsheet workarounds. Built to scale with your business.' },
-  { title: 'SaaS Insider Knowledge', desc: "Our team has worked inside high-growth SaaS companies — in M&A, equity research, and finance automation. We've seen what good looks like at scale." },
-  { title: 'Managed Service Model', desc: "We don't drop a project and disappear. We run your data infrastructure month over month — maintaining, evolving, and improving as your business grows." },
+const points = [
+  { title: 'Finance background', desc: 'M&A, equity research, SaaS metrics. We know what boards ask for.' },
+  { title: 'Technical depth', desc: 'Production-grade infrastructure, not spreadsheet workarounds.' },
+  { title: 'Operator mindset', desc: "We've worked inside high-growth companies. We know what actually gets used." },
+  { title: 'Managed model', desc: "We don't disappear after the build. We run it." },
 ];
 
 const TeamSection = () => (
-  <section id="about" className="py-12 md:py-20 lg:py-28">
+  <section id="about" className="py-14 md:py-24">
     <div className="container mx-auto px-4 md:px-6">
-      <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div className="grid lg:grid-cols-2 gap-10 items-start">
         <div>
-          <Badge variant="outline" className="mb-4">The Team</Badge>
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-6">
-            Experienced operators. Not just data engineers.
+          <Badge variant="outline" className="mb-3">Team</Badge>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl mb-4">
+            Operators, not just engineers.
           </h2>
-          <div className="space-y-4 text-muted-foreground leading-relaxed">
-            <p>
-              We're a team of analysts, engineers, and operators with backgrounds across SaaS M&A, equity research, and data infrastructure at high-growth technology companies.
-            </p>
-            <p>
-              We started BuilderHub because we kept seeing the same problem: companies with great products, drowning in spreadsheets, making decisions on data nobody trusted.
-            </p>
-            <p className="text-foreground font-medium">
-              We fix that. No fluff. No decks. Just a data layer that works — and a team that keeps it running.
-            </p>
-          </div>
+          <p className="text-muted-foreground leading-relaxed">
+            We've seen the same problem everywhere: good companies, drowning in spreadsheets, making decisions on data nobody trusts. We fix that.
+          </p>
         </div>
-        <div className="grid gap-4">
-          {strengths.map((s) => (
-            <Card key={s.title} className="border-l-2 border-l-primary rounded-l-none">
-              <CardHeader className="py-4">
-                <CardTitle className="text-base">{s.title}</CardTitle>
-                <CardDescription>{s.desc}</CardDescription>
-              </CardHeader>
-            </Card>
+        <div className="grid gap-3">
+          {points.map((p) => (
+            <div key={p.title} className="border-l-2 border-primary pl-4 py-1">
+              <p className="font-medium text-sm">{p.title}</p>
+              <p className="text-sm text-muted-foreground">{p.desc}</p>
+            </div>
           ))}
         </div>
       </div>
