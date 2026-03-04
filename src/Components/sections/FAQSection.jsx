@@ -13,9 +13,9 @@ const faqs = [
 ];
 
 const FAQSection = () => (
-  <section id="faq" className="py-20 md:py-28 lg:py-32 bg-muted/30">
+  <section id="faq" className="py-12 md:py-20 lg:py-28 bg-muted/30">
     <div className="container mx-auto px-4 md:px-6 max-w-3xl">
-      <div className="text-center mb-12">
+      <div className="text-center mb-8 md:mb-12">
         <Badge variant="outline" className="mb-4">FAQ</Badge>
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">Common questions</h2>
       </div>

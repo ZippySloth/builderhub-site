@@ -26,9 +26,9 @@ const personas = [
 ];
 
 const WhoItsForSection = () => (
-  <section id="who" className="py-20 md:py-28 lg:py-32 bg-muted/30">
+  <section id="who" className="py-12 md:py-20 lg:py-28 bg-muted/30">
     <div className="container mx-auto px-4 md:px-6">
-      <div className="text-center mb-16">
+      <div className="text-center mb-8 md:mb-12 lg:mb-16">
         <Badge variant="outline" className="mb-4">Who We Serve</Badge>
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">
           Built for companies with data and no answers.
