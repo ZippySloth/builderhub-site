@@ -28,3 +28,6 @@ venv/
 
 
 .vercel
+
+# Local Netlify folder
+.netlify

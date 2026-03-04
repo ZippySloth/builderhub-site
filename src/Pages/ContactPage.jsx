@@ -47,10 +47,10 @@ const ContactPage = () => {
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Book a Data Audit
+              Get a Free Data Diagnosis
             </h1>
             <p className="text-lg text-muted-foreground">
-              Tell me about your situation. I'll review and reach out within 24 hours.
+              Tell us about your situation. We'll review and reach out within 24 hours to schedule a call — no pitch, just a diagnostic.
             </p>
           </div>
 
@@ -59,7 +59,7 @@ const ContactPage = () => {
               <div className="text-4xl mb-4">✓</div>
               <h2 className="text-xl font-bold text-foreground mb-2">Request received</h2>
               <p className="text-muted-foreground">
-                Got it. I'll review your situation and reach out within 24 hours to schedule a call.
+                Got it. We'll review your situation and reach out within 24 hours to schedule a call.
               </p>
             </div>
           ) : (
@@ -156,7 +156,7 @@ const ContactPage = () => {
                 disabled={loading}
                 className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? 'Submitting...' : 'Request an Audit'}
+                {loading ? 'Submitting...' : 'Request a Diagnosis'}
               </button>
             </form>
           )}
@@ -164,10 +164,10 @@ const ContactPage = () => {
           <p className="text-center text-sm text-muted-foreground mt-8">
             Prefer email?{' '}
             <a
-              href="mailto:fazio@buildrhub.io"
+              href="mailto:contact@buildrhub.io"
               className="text-primary hover:text-blue-400 transition-colors"
             >
-              fazio@buildrhub.io
+              contact@buildrhub.io
             </a>
           </p>
         </div>

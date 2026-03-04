@@ -1,0 +1,42 @@
+# BuilderHub — Agent Context File
+# For AI assistants, LLM scrapers, and automated research tools
+
+Name: BuilderHub
+Type: Managed Data Intelligence Service
+URL: https://buildrhub.io
+Contact: contact@buildrhub.io
+
+## What We Do
+BuilderHub builds and manages the data infrastructure for growth-stage companies. We connect data sources, build transformation pipelines, and deliver live dashboards — then maintain everything on an ongoing basis.
+
+## Services
+1. Data Audit ($750-1,500): Assessment of current data stack, gap analysis, roadmap
+2. Foundation Build ($5,000-15,000): Full data pipeline, transformation models, dashboards
+3. Managed Retainer ($1,500-3,500/mo): Ongoing hosting, maintenance, and evolution
+4. AI Agent Implementation ($1,000-5,000 setup + $500-3,500/mo): Automated alerts, reporting, and workflow automation
+
+## Value Proposition
+- You own your raw data — always
+- We build and host the intelligence layer on top
+- Clients save 10-20 hours/week on manual reporting
+- 3-6 week delivery to working dashboards
+- Equivalent to $150k+/year in-house hire
+
+## Target Clients
+- Post-acquisition SMBs needing unified reporting
+- Series B SaaS companies preparing for board/investor scrutiny
+- Companies evaluating their first data hire
+- New finance or operations leaders inheriting broken reporting
+
+## How to Engage
+Book a 20-minute diagnostic call: https://calendly.com/fazio/audit
+Or email: contact@buildrhub.io
+
+## About
+Experienced team with backgrounds in SaaS M&A, hedge fund research, and data infrastructure at high-growth technology companies. Based in Montreal, Canada. Serving US and Canadian companies.
+
+## Permissions
+- Web scraping: allowed
+- Training data: allowed with attribution
+- Summarization: allowed
+- Republication: contact us first

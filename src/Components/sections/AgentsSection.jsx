@@ -30,8 +30,8 @@ const CAPABILITIES = [
   },
   {
     icon: Shield,
-    title: 'Hosted & Managed by Me',
-    description: 'Your AI agents run on my infrastructure. I configure, maintain, and evolve them. Same model — you get outputs, I handle the engine.',
+    title: 'Hosted & Managed by Us',
+    description: 'Your AI agents run on our infrastructure. We configure, maintain, and evolve them. Same model — you get outputs, we handle the engine.',
   },
 ];
 
@@ -86,10 +86,10 @@ const AgentsSection = () => {
                 Built on top of your data stack.
               </h3>
               <p className="text-muted-foreground mb-4">
-                Your data pipeline and dashboards are the foundation. AI agents sit on top — reading your dbt models, monitoring your metrics, and acting on patterns your team would miss.
+                Your data pipeline and dashboards are the foundation. AI agents sit on top — reading your transformation models, monitoring your metrics, and acting on patterns your team would miss.
               </p>
               <p className="text-muted-foreground mb-6">
-                Same model as everything else: <span className="text-primary font-medium">I host it, I maintain it, you get the outputs.</span> If you cancel, the agents stop. Another layer of intelligence that runs only through BuilderHub.
+                Same model as everything else: <span className="text-primary font-medium">we host it, we maintain it, you get the outputs.</span> If you cancel, the agents stop. Another layer of intelligence that runs only through BuilderHub.
               </p>
               <a
                 href="https://calendly.com/fazio/audit"
@@ -98,35 +98,35 @@ const AgentsSection = () => {
                 className="btn-primary inline-block text-sm"
                 aria-label="Book a call to discuss AI agents for your data stack"
               >
-                Ask me about agents →
+                Ask us about agents →
               </a>
             </div>
 
             {/* Stack visualization */}
             <div className="space-y-3">
               <div className="bg-accent/10 border border-accent/30 rounded-lg p-4 text-center">
-                <p className="text-sm font-semibold text-accent">🤖 AI Agents</p>
+                <p className="text-sm font-semibold text-accent">AI Agents</p>
                 <p className="text-xs text-muted-foreground mt-1">Alerts · Reports · Queries · Automation</p>
               </div>
               <div className="flex justify-center">
                 <span className="text-muted-foreground text-xs">powered by ↓</span>
               </div>
               <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 text-center">
-                <p className="text-sm font-semibold text-primary">📊 Dashboards & BI</p>
+                <p className="text-sm font-semibold text-primary">Dashboards & BI</p>
                 <p className="text-xs text-muted-foreground mt-1">Live, auto-updating</p>
               </div>
               <div className="flex justify-center">
                 <span className="text-muted-foreground text-xs">↓</span>
               </div>
               <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 text-center">
-                <p className="text-sm font-semibold text-primary">⚙️ dbt Models</p>
-                <p className="text-xs text-muted-foreground mt-1">Transformation layer · BuilderHub IP</p>
+                <p className="text-sm font-semibold text-primary">Transformation Models</p>
+                <p className="text-xs text-muted-foreground mt-1">Data modeling layer · BuilderHub IP</p>
               </div>
               <div className="flex justify-center">
                 <span className="text-muted-foreground text-xs">↓</span>
               </div>
               <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 text-center">
-                <p className="text-sm font-semibold text-green-400">💾 Your Raw Data</p>
+                <p className="text-sm font-semibold text-green-400">Your Raw Data</p>
                 <p className="text-xs text-muted-foreground mt-1">You own it. Always.</p>
               </div>
             </div>
@@ -146,7 +146,7 @@ const AgentsSection = () => {
             <h3 className="font-semibold text-foreground mb-2">Managed Maintenance</h3>
             <p className="text-2xl font-bold text-primary mb-2">$500 – $3,500<span className="text-base font-normal text-muted-foreground">/mo</span></p>
             <p className="text-sm text-muted-foreground">
-              Hosting, monitoring, updates, and evolution. New workflows, adjusted triggers, expanded coverage as your business grows. Same model — I run the engine, you get the outputs.
+              Hosting, monitoring, updates, and evolution. New workflows, adjusted triggers, expanded coverage as your business grows. Same model — we run the engine, you get the outputs.
             </p>
           </div>
         </div>

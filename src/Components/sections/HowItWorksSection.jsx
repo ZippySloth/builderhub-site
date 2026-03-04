@@ -47,7 +47,7 @@ const HowItWorksSection = () => {
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="text-primary font-bold text-sm tracking-wider">STEP 01</span>
                 <span className="bg-accent/10 text-accent text-xs font-medium px-3 py-1 rounded-full">
-                  Start Here
+                  Low Risk Entry
                 </span>
               </div>
               <h3 className="text-2xl font-bold text-foreground mb-2">
@@ -57,7 +57,10 @@ const HowItWorksSection = () => {
                 </span>
               </h3>
               <p className="text-muted-foreground mb-4 max-w-3xl">
-                I dig into your current data stack — what tools you use, what's connected, what's broken, what's missing. You get a full gap analysis and a prioritized roadmap of exactly what to fix. Whether you hire me to build anything or not.
+                We dig into your current data stack — what tools you use, what's connected, what's broken, what's missing. You get a full gap analysis and a prioritized roadmap of exactly what to fix. Whether you work with us to build anything or not.
+              </p>
+              <p className="text-sm text-primary font-medium mb-2">
+                If we can't find $10,000 of fixable problems in your data stack, we'll refund the audit fee.
               </p>
               <p className="text-sm text-primary italic">
                 Credited toward the build if you proceed.
@@ -76,12 +79,12 @@ const HowItWorksSection = () => {
                 </span>
               </h3>
               <p className="text-muted-foreground mb-6 max-w-3xl">
-                I connect your data sources, build the transformation models, and put live auto-updating dashboards on top. No more manual updates. No more "the numbers don't match."
+                We connect your data sources, build the transformation models, and put live auto-updating dashboards on top. No more manual updates. No more "the numbers don't match."
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
                   '2-5 data source connections',
-                  'Full dbt model layer (staging → marts)',
+                  'Full data model layer (staging → marts)',
                   '4-6 live dashboards',
                   'Documentation + training',
                 ].map((item, i) => (
@@ -103,7 +106,7 @@ const HowItWorksSection = () => {
                 <span className="text-muted-foreground font-normal text-lg">monthly</span>
               </h3>
               <p className="text-muted-foreground mb-6 max-w-3xl">
-                I host and maintain everything. Models, dashboards, metrics — all running, all evolving as your business grows.
+                We host and maintain everything. Models, dashboards, metrics — all running, all evolving as your business grows.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {tiers.map((tier, i) => (

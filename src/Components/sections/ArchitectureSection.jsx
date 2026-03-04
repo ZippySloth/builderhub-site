@@ -48,7 +48,7 @@ const ArchitectureSection = () => {
               The Architecture
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4 mb-4">
-              You own your data. I run the intelligence.
+              You own your data. We run the intelligence.
             </h2>
           </div>
 
@@ -80,7 +80,7 @@ const ArchitectureSection = () => {
 
           {/* Note */}
           <p className="text-center text-sm text-muted-foreground mt-10">
-            Don't have a data warehouse? I set one up for you. Zero existing infrastructure required.
+            Don't have a data warehouse? We set one up for you. Zero existing infrastructure required.
           </p>
 
           {/* Warning callout */}

@@ -86,7 +86,7 @@ const HeroSection = () => {
                 BuilderHub builds the pipelines, models, and dashboards that turn your scattered data into one source of truth.
               </p>
               <p className="text-sm text-primary font-medium italic">
-                You own your raw data. I run the intelligence on top of it.
+                You own your raw data. We run the intelligence on top of it.
               </p>
               <div className="flex flex-wrap gap-4 pt-2">
                 <a
@@ -95,7 +95,7 @@ const HeroSection = () => {
                   rel="noopener noreferrer"
                   className="btn-primary inline-block"
                 >
-                  Book an Audit Call →
+                  Get a Free Data Diagnosis →
                 </a>
                 <a
                   href="#services"
@@ -104,9 +104,30 @@ const HeroSection = () => {
                   See how it works ↓
                 </a>
               </div>
+              <p className="text-xs text-muted-foreground">No obligation · 20 minutes · We'll tell you what's broken</p>
             </div>
 
-            {/* Right terminal */}
+            {/* Right: terminal on desktop, stats on mobile */}
+            <div className="lg:hidden">
+              {/* Mobile: clean results card */}
+              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">What clients gain</p>
+                {[
+                  { metric: '10–20 hrs/week', label: 'saved on manual reporting' },
+                  { metric: '3–6 weeks', label: 'to working dashboards' },
+                  { metric: '$150k+/yr', label: 'saved vs. in-house hire' },
+                  { metric: '1 source of truth', label: 'across all data tools' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                    <div>
+                      <span className="text-foreground font-semibold">{item.metric}</span>
+                      <span className="text-muted-foreground text-sm"> — {item.label}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
             <div className="hidden lg:block">
               <TerminalMock />
             </div>

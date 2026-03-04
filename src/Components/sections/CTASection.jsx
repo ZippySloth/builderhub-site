@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useReveal } from '../../hooks/useReveal';
 
 const CTASection = () => {
@@ -15,7 +16,7 @@ const CTASection = () => {
             Ready to stop wrestling with your data?
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-            Book a 20-minute call. I'll tell you what's broken and how I'd fix it — whether you hire me or not.
+            Book a 20-minute call. We'll tell you what's broken and how we'd fix it — whether you work with us or not.
           </p>
           <div className="flex flex-col items-center gap-4">
             <a
@@ -29,11 +30,21 @@ const CTASection = () => {
             <p className="text-sm text-muted-foreground">
               Or email{' '}
               <a
-                href="mailto:fazio@buildrhub.io"
+                href="mailto:contact@buildrhub.io"
                 className="text-primary hover:text-blue-400 transition-colors"
               >
-                fazio@buildrhub.io
+                contact@buildrhub.io
               </a>
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Prefer to start small?{' '}
+              <Link
+                to="/contact"
+                className="text-primary hover:text-blue-400 transition-colors"
+              >
+                Fill out a brief →
+              </Link>{' '}
+              and we'll reach out.
             </p>
             <p className="text-xs text-muted-foreground mt-4 max-w-md">
               Most clients save 10-20 hours/week in manual reporting. At $50/hr, that's $26-52k/year. The audit is $750.

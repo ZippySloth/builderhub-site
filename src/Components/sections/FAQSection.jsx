@@ -5,23 +5,23 @@ import { useReveal } from '../../hooks/useReveal';
 const faqs = [
   {
     q: 'How is this different from hiring a data analyst?',
-    a: "Most analysts can build dashboards but don't understand the business context behind the numbers. Most business people know what metrics matter but can't build the systems. I do both — and I maintain everything ongoing as a managed service, not a one-time project.",
+    a: "Most analysts can build dashboards but don't understand the business context behind the numbers. Most business people know what metrics matter but can't build the systems. We do both — and we maintain everything ongoing as a managed service, not a one-time project.",
   },
   {
     q: 'What if our data is a complete mess?',
-    a: "That's normal. Most of my clients start there. Scattered tools, manual processes, numbers nobody trusts. That's exactly what the audit surfaces — and what the build fixes.",
+    a: "That's normal. Most of our clients start there. Scattered tools, manual processes, numbers nobody trusts. That's exactly what the audit surfaces — and what the build fixes.",
   },
   {
     q: 'What tools do you work with?',
-    a: "Core stack: dbt, Airbyte, BigQuery, Looker Studio. But I'm tool-agnostic — Snowflake, Redshift, Postgres, whatever you have. The ingestion and transformation layer adapts to your infrastructure.",
+    a: "We use best-in-class, enterprise-grade tools. We'll walk you through the stack on a call.",
   },
   {
     q: "What if we don't have a data warehouse?",
-    a: 'No problem. I set one up for you. Your SaaS tools connect directly — no existing infrastructure required. Most non-technical clients never see a database.',
+    a: "No problem. We set one up for you. Your SaaS tools connect directly — no existing infrastructure required. Most non-technical clients never see a database.",
   },
   {
-    q: 'Why do you host the dbt models instead of handing them over?',
-    a: "The models need ongoing maintenance — schema changes, API updates, new requirements. If you're not a dbt shop, they'll break within months. Hosting is how I ensure quality. You get the outputs: dashboards, reports, clean metrics. I handle the plumbing.",
+    q: 'Why do you host the transformation models instead of handing them over?',
+    a: "The models need ongoing maintenance — schema changes, API updates, new requirements. If you're not running a data engineering team, they'll break within months. Hosting is how we ensure quality. You get the outputs: dashboards, reports, clean metrics. We handle the plumbing.",
   },
   {
     q: 'What happens if we cancel the retainer?',

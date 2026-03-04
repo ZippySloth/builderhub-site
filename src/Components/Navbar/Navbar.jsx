@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useThemeContext } from '../../context/ThemeContext';
 
 import logoWhite from '../../assets/logo_white.png';
 
@@ -16,6 +17,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { theme, toggle } = useThemeContext();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -46,7 +48,7 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            <img src={logoWhite} alt="BuilderHub" className="h-7 w-auto" />
+            <img src={logoWhite} alt="BuilderHub logo" className="h-7 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
@@ -71,6 +73,13 @@ const Navbar = () => {
             >
               Contact
             </Link>
+            <button
+              onClick={toggle}
+              aria-label="Toggle light/dark mode"
+              className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors"
+            >
+              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <a
               href="https://calendly.com/fazio/audit"
               target="_blank"
@@ -83,13 +92,22 @@ const Navbar = () => {
           </div>
 
           {/* Mobile hamburger */}
-          <button
-            className="md:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/60"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggle}
+              aria-label="Toggle light/dark mode"
+              className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/60 transition-colors"
+            >
+              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+            <button
+              className="p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle navigation menu"
+            >
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
       </div>
 

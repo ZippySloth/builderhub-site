@@ -10,9 +10,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <img src={logoWhite} alt="BuilderHub" className="h-7 w-auto mb-3" />
+            <img src={logoWhite} alt="BuilderHub logo" className="h-7 w-auto mb-3" />
             <p className="text-sm text-muted-foreground max-w-xs">
-              Managed data intelligence for growth companies. You own your raw data. I run the intelligence on top of it.
+              Managed data intelligence for growth companies. You own your raw data. We run the intelligence on top of it.
             </p>
           </div>
 
@@ -33,19 +33,19 @@ const Footer = () => {
             <p className="text-sm font-semibold text-foreground mb-3">Get in Touch</p>
             <div className="flex flex-col gap-3">
               <a
-                href="mailto:fazio@buildrhub.io"
+                href="mailto:contact@buildrhub.io"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Email Fazio at BuilderHub"
+                aria-label="Email BuilderHub"
               >
                 <Mail className="h-4 w-4 shrink-0" />
-                fazio@buildrhub.io
+                contact@buildrhub.io
               </a>
               <a
-                href="https://www.linkedin.com/in/faicalalalawi/"
+                href="https://www.linkedin.com/company/buildrhub/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Connect with Faiçal on LinkedIn"
+                aria-label="Connect with BuilderHub on LinkedIn"
               >
                 <Linkedin className="h-4 w-4 shrink-0" />
                 LinkedIn

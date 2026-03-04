@@ -1,12 +1,23 @@
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 
-const credentials = [
-  { emoji: '🏦', title: 'SaaS M&A', desc: 'Due diligence, unit economics, 50+ companies analyzed' },
-  { emoji: '📊', title: 'Hedge Fund Analyst', desc: 'Small-cap equity research, financial modeling' },
-  { emoji: '⚙️', title: 'Finance Automation', desc: 'Series C SaaS · dbt · Python · Databricks' },
-  { emoji: '🛠️', title: 'Core Stack', desc: 'dbt · BigQuery · Airbyte · SQL · Python · Looker Studio' },
+const strengths = [
+  {
+    title: 'Finance Fluency',
+    desc: 'We think in unit economics, cohorts, and board metrics — not just queries. We build what actually matters to your business.',
+  },
+  {
+    title: 'Engineering Depth',
+    desc: 'Production-grade data pipelines, not spreadsheet workarounds. Infrastructure built to scale with your business.',
+  },
+  {
+    title: 'SaaS Insider Experience',
+    desc: "Our team has worked inside high-growth SaaS companies. We've seen what works at scale — and we bring that to you.",
+  },
+  {
+    title: 'Managed Service Model',
+    desc: "We don't drop a project and disappear. We run your data infrastructure long-term — maintaining, evolving, and improving it month over month.",
+  },
 ];
 
 const AboutSection = () => {
@@ -20,41 +31,30 @@ const AboutSection = () => {
             {/* Left — Bio */}
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                About Faiçal
+                The team behind BuilderHub
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  I've spent my career at the intersection of finance and tech — SaaS M&A, hedge fund equity research, and now building the data and automation infrastructure at a Series C SaaS company.
+                  We're a team of analysts, engineers, and operators with backgrounds across SaaS M&A, equity research, and data infrastructure at high-growth technology companies.
                 </p>
                 <p>
-                  I've seen how the best data stacks work at scale. And I've seen what happens when companies fly blind — bad decisions, board meetings where nobody can answer basic questions, finance teams spending two days on a close that should take two hours.
+                  We started BuilderHub because we kept seeing the same problem: companies with great products, drowning in spreadsheets, making decisions on data nobody trusted. We fix that.
                 </p>
                 <p>
-                  Most growth-stage companies need what I build. But they can't afford a full data team — and they don't need one. They need a managed service that runs like a product.
+                  No fluff. No slide decks. Just a data layer that works — and a team that keeps it running.
                 </p>
-                <p className="text-foreground font-medium">That's BuilderHub.</p>
               </div>
-              <a
-                href="https://www.linkedin.com/in/faicalalalawi/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-primary hover:text-blue-400 transition-colors mt-6 text-sm font-medium"
-              >
-                <ExternalLink className="w-4 h-4" />
-                View LinkedIn Profile
-              </a>
             </div>
 
-            {/* Right — Credentials */}
+            {/* Right — Strengths */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {credentials.map((c, i) => (
+              {strengths.map((s, i) => (
                 <div
                   key={i}
-                  className="bg-card border border-border rounded-xl p-5 glow-blue-hover transition-all duration-300"
+                  className="bg-card border-l-2 border-l-primary border border-border rounded-xl p-5"
                 >
-                  <div className="text-2xl mb-2">{c.emoji}</div>
-                  <h3 className="text-lg font-semibold text-foreground mb-1">{c.title}</h3>
-                  <p className="text-sm text-muted-foreground">{c.desc}</p>
+                  <h3 className="font-semibold text-foreground mb-1">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground">{s.desc}</p>
                 </div>
               ))}
             </div>
