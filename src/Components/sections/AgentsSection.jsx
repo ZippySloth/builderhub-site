@@ -133,12 +133,26 @@ const AgentsSection = () => {
           </div>
         </div>
 
-        {/* Pricing note */}
-        <div className="mt-10 text-center">
-          <p className="text-sm text-muted-foreground">
-            Available as an add-on to any retainer tier. Pricing depends on complexity — most setups are <span className="text-foreground font-medium">$500-$1,500/month</span> on top of your retainer.
-          </p>
+        {/* Pricing */}
+        <div className="mt-12 grid md:grid-cols-2 gap-6">
+          <div className="bg-card border border-border rounded-xl p-6 glow-blue-hover transition-all">
+            <h3 className="font-semibold text-foreground mb-2">Implementation</h3>
+            <p className="text-2xl font-bold text-primary mb-2">$1,000 – $5,000</p>
+            <p className="text-sm text-muted-foreground">
+              Full agent setup, configuration, and integration with your data stack. Scope depends on number of workflows, data sources, and automation complexity. Works standalone or on top of an existing BuilderHub data layer.
+            </p>
+          </div>
+          <div className="bg-card border border-border rounded-xl p-6 glow-blue-hover transition-all">
+            <h3 className="font-semibold text-foreground mb-2">Managed Maintenance</h3>
+            <p className="text-2xl font-bold text-primary mb-2">$500 – $3,500<span className="text-base font-normal text-muted-foreground">/mo</span></p>
+            <p className="text-sm text-muted-foreground">
+              Hosting, monitoring, updates, and evolution. New workflows, adjusted triggers, expanded coverage as your business grows. Same model — I run the engine, you get the outputs.
+            </p>
+          </div>
         </div>
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          Available as a standalone service or as an add-on to any data retainer.
+        </p>
       </div>
     </section>
   );
