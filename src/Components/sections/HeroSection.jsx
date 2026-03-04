@@ -8,15 +8,15 @@ import { useTheme } from '../../context/ThemeContext';
 
 const terminalLines = [
   { text: '$ audit: scanning your data sources...', delay: 300 },
-  { text: '✓ stripe  — revenue & subscriptions', delay: 900 },
+  { text: '✓ stripe — revenue & subscriptions', delay: 900 },
   { text: '✓ hubspot — pipeline & attribution', delay: 1300 },
   { text: '✓ google analytics — traffic & conversions', delay: 1700 },
   { text: '$ building transformation models...', delay: 2200 },
   { text: '✓ weekly_revenue_summary', delay: 2700 },
   { text: '✓ churn_by_cohort', delay: 3000 },
   { text: '✓ marketing_attribution', delay: 3300 },
-  { text: '', delay: 3600 },
-  { text: '✓ dashboards live — auto-updated every hour', delay: 4000 },
+  { text: '', delay: 3700 },
+  { text: '✓ dashboards live — auto-updated every hour', delay: 4200 },
 ];
 
 const TerminalMock = () => {
@@ -62,8 +62,8 @@ const MobileMetrics = () => (
       <div className="grid grid-cols-3 divide-x text-center">
         {[
           { v: '7–10 days', l: 'first dashboard' },
-          { v: '10–20 h', l: 'saved/week' },
-          { v: '$150k+', l: 'vs. hiring in-house' },
+          { v: '10–20 hrs', l: 'saved per week' },
+          { v: '$150k+', l: 'vs. in-house hire' },
         ].map((s, i) => (
           <div key={i} className="px-2 py-1">
             <div className="font-bold text-xs sm:text-sm leading-tight">{s.v}</div>
@@ -75,10 +75,10 @@ const MobileMetrics = () => (
   </Card>
 );
 
-const deliverables = [
-  'Single source of truth dashboard (sales, ops, finance, marketing)',
-  'Automated reporting + alerts via Slack or email',
-  'Attribution and tracking that matches your actual revenue',
+const bullets = [
+  'One dashboard. Every data source. Always up to date.',
+  'Automated weekly reports that show up before you ask for them.',
+  'Revenue attribution that finally matches what actually happened.',
 ];
 
 const HeroSection = () => {
@@ -95,18 +95,18 @@ const HeroSection = () => {
             <Badge variant="outline" className="w-fit text-xs">Managed Data Intelligence · Montreal, CA</Badge>
 
             <div className="space-y-4">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl lg:text-6xl/none">
-                Turn messy business data into decisions that{' '}
-                <span className="gradient-text">grow revenue.</span>
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl lg:text-[3.5rem]/none">
+                Stop running your business on{' '}
+                <span className="gradient-text">spreadsheets you don't trust.</span>
               </h1>
               <p className="text-muted-foreground text-base md:text-lg max-w-xl leading-relaxed">
-                For growing companies that need dashboards, tracking, and automated reporting — without hiring a data team.
+                BuilderHub builds the data layer your company should have had a year ago — and runs it for you so it never breaks, goes stale, or lives in one person's laptop.
               </p>
-              <ul className="space-y-2">
-                {deliverables.map((d, i) => (
+              <ul className="space-y-2 pt-1">
+                {bullets.map((b, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
                     <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
-                    <span>{d}</span>
+                    {b}
                   </li>
                 ))}
               </ul>
@@ -115,12 +115,12 @@ const HeroSection = () => {
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button size="lg" className="gap-2" asChild>
                 <a href="https://calendly.com/fazio/audit" target="_blank" rel="noopener noreferrer">
-                  Book a 15-min Audit <ArrowRight className="h-4 w-4 shrink-0" />
+                  Book a Free 15-min Call <ArrowRight className="h-4 w-4 shrink-0" />
                 </a>
               </Button>
               <Button size="lg" variant="outline" className="gap-2" asChild>
-                <a href="#how-it-works">
-                  See how it works <ChevronDown className="h-4 w-4 shrink-0" />
+                <a href="#services">
+                  See what we build <ChevronDown className="h-4 w-4 shrink-0" />
                 </a>
               </Button>
             </div>
@@ -136,7 +136,7 @@ const HeroSection = () => {
             <div className="hidden md:grid grid-cols-3 gap-3 max-w-sm">
               {[
                 { v: '7–10 days', l: 'first dashboard live' },
-                { v: '10–20 h', l: 'saved per week' },
+                { v: '10–20 hrs', l: 'saved per week' },
                 { v: '$150k+', l: 'vs. in-house hire' },
               ].map((s, i) => (
                 <div key={i} className="text-center p-2 rounded-lg bg-background/80 border">
