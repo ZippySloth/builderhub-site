@@ -5,6 +5,8 @@ import './index.css';
 import HomePage from './Pages/HomePage';
 import ContactPage from './Pages/ContactPage';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
+import BlogListPage from './Pages/BlogListPage';
+import BlogPostPage from './Pages/BlogPostPage';
 import ScrollToTop from './ScrollToTop';
 
 const App = () => {
@@ -16,6 +18,8 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/blog" element={<BlogListPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
           {/* Legacy redirects */}
           <Route path="/web" element={<Navigate to="/" replace />} />
           <Route path="/viral" element={<Navigate to="/" replace />} />
