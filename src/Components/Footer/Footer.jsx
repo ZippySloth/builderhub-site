@@ -1,79 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Linkedin, Mail } from 'lucide-react';
+import logoBlack from '../../assets/logo_black.png';
 import logoWhite from '../../assets/logo_white.png';
 
-const Footer = () => {
-  return (
-    <footer className="border-t border-border bg-card/50 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Brand */}
-          <div>
-            <img src={logoWhite} alt="BuilderHub logo" className="h-7 w-auto mb-3" />
-            <p className="text-sm text-muted-foreground max-w-xs">
-              Managed data intelligence for growth companies. You own your raw data. We run the intelligence on top of it.
-            </p>
-          </div>
-
-          {/* Navigation */}
-          <div>
-            <p className="text-sm font-semibold text-foreground mb-3">Navigation</p>
-            <nav className="flex flex-col gap-2">
-              <a href="/#services" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Services</a>
-              <a href="/#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">How It Works</a>
-              <a href="/#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
-              <a href="/#faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
-              <Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
-            </nav>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <p className="text-sm font-semibold text-foreground mb-3">Get in Touch</p>
-            <div className="flex flex-col gap-3">
-              <a
-                href="mailto:contact@buildrhub.io"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Email BuilderHub"
-              >
-                <Mail className="h-4 w-4 shrink-0" />
-                contact@buildrhub.io
-              </a>
-              <a
-                href="https://www.linkedin.com/company/buildrhub/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Connect with BuilderHub on LinkedIn"
-              >
-                <Linkedin className="h-4 w-4 shrink-0" />
-                LinkedIn
-              </a>
-              <a
-                href="https://calendly.com/fazio/audit"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-medium text-primary hover:text-blue-400 transition-colors"
-                aria-label="Book a data audit call"
-              >
-                Book an Audit →
-              </a>
-            </div>
+const Footer = () => (
+  <footer className="border-t bg-muted/30 py-12">
+    <div className="container mx-auto px-4 md:px-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+        <div className="col-span-2 md:col-span-1">
+          <img src={logoBlack} alt="BuilderHub" className="h-7 block dark:hidden mb-3" />
+          <img src={logoWhite} alt="BuilderHub" className="h-7 hidden dark:block mb-3" />
+          <p className="text-sm text-muted-foreground">
+            Managed data intelligence for growth companies.
+          </p>
+        </div>
+        <div>
+          <p className="font-semibold text-sm mb-3">Services</p>
+          <div className="flex flex-col gap-2">
+            <a href="/#services" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Data Audit</a>
+            <a href="/#services" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Foundation Build</a>
+            <a href="/#services" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Managed Retainer</a>
+            <a href="/#services" className="text-sm text-muted-foreground hover:text-foreground transition-colors">AI Agents</a>
           </div>
         </div>
-
-        <div className="pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-muted-foreground">
-            © 2026 BuilderHub · Built in Montreal 🇨🇦
-          </p>
-          <Link to="/privacypolicy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-            Privacy Policy
-          </Link>
+        <div>
+          <p className="font-semibold text-sm mb-3">Company</p>
+          <div className="flex flex-col gap-2">
+            <a href="/#about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">About</a>
+            <a href="/#faq" className="text-sm text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
+            <Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</Link>
+          </div>
+        </div>
+        <div>
+          <p className="font-semibold text-sm mb-3">Resources</p>
+          <div className="flex flex-col gap-2">
+            <a href="/llms.txt" className="text-sm text-muted-foreground hover:text-foreground transition-colors">llms.txt</a>
+            <a href="/sitemap.xml" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Sitemap</a>
+            <Link to="/privacypolicy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link>
+            <a href="mailto:contact@buildrhub.io" className="text-sm text-muted-foreground hover:text-foreground transition-colors">contact@buildrhub.io</a>
+          </div>
         </div>
       </div>
-    </footer>
-  );
-};
+      <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p className="text-xs text-muted-foreground">© 2026 BuilderHub · Built in Montreal 🇨🇦</p>
+        <p className="text-xs text-muted-foreground">Managed Data Intelligence for Growth Companies</p>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;

@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { useReveal } from '../../hooks/useReveal';
+import { ArrowRight, ArrowDown } from 'lucide-react';
+import { Button } from '@/Components/ui/button';
+import { Badge } from '@/Components/ui/badge';
+import SynthwaveBackground from '../SynthwaveBackground';
+import { useTheme } from '../../context/ThemeContext';
 
 const terminalLines = [
-  { text: '$ dbt run --select staging.*', delay: 0 },
-  { text: 'Running 12 models...', delay: 600 },
-  { text: '✓ stg_stripe__charges', delay: 1200 },
-  { text: '✓ stg_hubspot__contacts', delay: 1600 },
-  { text: '✓ stg_quickbooks__invoices', delay: 2000 },
-  { text: '✓ int_revenue_by_customer', delay: 2400 },
-  { text: '✓ fct_mrr_waterfall', delay: 2800 },
-  { text: '12 of 12 passed ✓', delay: 3400 },
+  { text: '$ connecting data sources...', delay: 300 },
+  { text: '✓ stripe connected', delay: 900 },
+  { text: '✓ hubspot connected', delay: 1300 },
+  { text: '✓ quickbooks connected', delay: 1700 },
+  { text: '$ running transformation models...', delay: 2200 },
+  { text: '✓ revenue_by_customer', delay: 2700 },
+  { text: '✓ mrr_waterfall', delay: 3000 },
+  { text: '✓ churn_by_cohort', delay: 3300 },
   { text: '', delay: 3600 },
-  { text: 'Dashboard updated — 14s ago', delay: 4000 },
+  { text: '✓ dashboards live — updated 8s ago', delay: 4000 },
 ];
 
 const TerminalMock = () => {
   const [visibleLines, setVisibleLines] = useState(0);
-
   useEffect(() => {
     const timers = terminalLines.map((line, i) =>
       setTimeout(() => setVisibleLines(i + 1), line.delay)
@@ -25,127 +28,84 @@ const TerminalMock = () => {
   }, []);
 
   return (
-    <div className="bg-card border border-border rounded-xl overflow-hidden shadow-2xl glow-blue">
-      {/* Traffic light dots */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
-        <div className="w-3 h-3 rounded-full bg-red-500/80" />
-        <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-        <div className="w-3 h-3 rounded-full bg-green-500/80" />
-        <span className="ml-3 text-xs text-muted-foreground">terminal — dbt</span>
-      </div>
-      {/* Terminal content */}
-      <div className="terminal p-4 min-h-[280px]">
-        {terminalLines.slice(0, visibleLines).map((line, i) => (
-          <div
-            key={i}
-            className={`${
-              line.text.startsWith('✓')
-                ? 'text-green-400'
-                : line.text.startsWith('$')
-                ? 'text-primary'
-                : line.text.includes('passed')
-                ? 'text-green-400 font-bold'
-                : line.text.includes('Dashboard')
-                ? 'text-accent'
-                : 'text-muted-foreground'
-            }`}
-          >
-            {line.text}
-          </div>
-        ))}
-        {visibleLines < terminalLines.length && (
-          <span className="inline-block w-2 h-4 bg-primary animate-blink" />
-        )}
+    <div className="mx-auto aspect-video w-full max-w-[600px] overflow-hidden rounded-xl border bg-muted/50 p-2">
+      <div className="flex h-full w-full flex-col rounded-lg bg-background p-4">
+        <div className="flex items-center gap-2 border-b pb-2">
+          <div className="h-3 w-3 rounded-full bg-red-500" />
+          <div className="h-3 w-3 rounded-full bg-yellow-500" />
+          <div className="h-3 w-3 rounded-full bg-green-500" />
+          <div className="ml-2 text-xs font-medium text-muted-foreground">builderhub.terminal</div>
+        </div>
+        <div className="terminal flex-1 p-2 text-sm overflow-hidden">
+          {terminalLines.slice(0, visibleLines).map((line, i) => (
+            <div key={i} className={
+              line.text.startsWith('✓') ? 'text-green-500 dark:text-green-400' :
+              line.text.startsWith('$') ? 'text-primary' :
+              'text-muted-foreground'
+            }>
+              {line.text}
+            </div>
+          ))}
+          {visibleLines < terminalLines.length && (
+            <span className="inline-block w-2 h-4 bg-primary animate-blink" />
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-const metrics = [
-  { value: '95%+', label: 'gross margin', sub: 'Retainer margins' },
-  { value: '$150k+/yr', label: 'saved', sub: 'vs. in-house hire' },
-  { value: '3-6 weeks', label: '', sub: 'To working dashboards' },
-];
-
 const HeroSection = () => {
-  const [ref, visible] = useReveal(0.1);
+  const { isDarkMode } = useTheme();
 
   return (
-    <section className="relative min-h-screen grid-bg flex flex-col justify-center pt-20">
-      <div ref={ref} className={`reveal ${visible ? 'visible' : ''}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left content */}
-            <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+    <section className="relative w-full py-16 md:py-28 lg:py-36 px-5 lg:px-8">
+      <div className="absolute inset-0 z-0">
+        <SynthwaveBackground isDarkMode={isDarkMode} />
+      </div>
+      <div className="container relative z-10 px-4 md:px-6">
+        <div className="grid gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_600px] items-center">
+          <div className="flex flex-col justify-center space-y-6">
+            <Badge variant="outline" className="w-fit">Managed Data Intelligence</Badge>
+            <div className="space-y-3">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                 Your data is everywhere.
                 <br />
                 <span className="gradient-text">Your answers are nowhere.</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-xl">
-                BuilderHub builds the pipelines, models, and dashboards that turn your scattered data into one source of truth.
+              <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                BuilderHub connects your data sources, builds the transformation layer, and delivers live dashboards — then maintains everything ongoing. You own your raw data. We run the intelligence on top of it.
               </p>
-              <p className="text-sm text-primary font-medium italic">
-                You own your raw data. We run the intelligence on top of it.
-              </p>
-              <div className="flex flex-wrap gap-4 pt-2">
-                <a
-                  href="https://calendly.com/fazio/audit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary inline-block"
-                >
-                  Get a Free Data Diagnosis →
-                </a>
-                <a
-                  href="#services"
-                  className="btn-secondary inline-block"
-                >
-                  See how it works ↓
-                </a>
-              </div>
-              <p className="text-xs text-muted-foreground">No obligation · 20 minutes · We'll tell you what's broken</p>
             </div>
-
-            {/* Right: terminal on desktop, stats on mobile */}
-            <div className="lg:hidden">
-              {/* Mobile: clean results card */}
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">What clients gain</p>
-                {[
-                  { metric: '10–20 hrs/week', label: 'saved on manual reporting' },
-                  { metric: '3–6 weeks', label: 'to working dashboards' },
-                  { metric: '$150k+/yr', label: 'saved vs. in-house hire' },
-                  { metric: '1 source of truth', label: 'across all data tools' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                    <div>
-                      <span className="text-foreground font-semibold">{item.metric}</span>
-                      <span className="text-muted-foreground text-sm"> — {item.label}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="flex flex-col gap-3 min-[400px]:flex-row">
+              <Button size="lg" className="gap-2" asChild>
+                <a href="https://calendly.com/fazio/audit" target="_blank" rel="noopener noreferrer">
+                  Get a Free Data Diagnosis <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" className="gap-2" asChild>
+                <a href="#services">
+                  See how it works <ArrowDown className="h-4 w-4" />
+                </a>
+              </Button>
             </div>
-            <div className="hidden lg:block">
-              <TerminalMock />
+            <p className="text-xs text-muted-foreground">No obligation · 20 minutes · We'll tell you exactly what's broken</p>
+            <div className="grid grid-cols-3 gap-4 pt-2 max-w-md">
+              {[
+                { v: '3–6 weeks', l: 'to live dashboards' },
+                { v: '10–20 hrs', l: 'saved per week' },
+                { v: '$150k+', l: 'vs. hiring in-house' },
+              ].map((s, i) => (
+                <div key={i} className="text-center p-3 rounded-lg bg-background/80 border">
+                  <div className="font-bold text-sm">{s.v}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">{s.l}</div>
+                </div>
+              ))}
             </div>
           </div>
-
-          {/* Metric cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16 lg:mt-20">
-            {metrics.map((m, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border rounded-xl p-6 text-center glow-blue-hover transition-all duration-300"
-              >
-                <div className="text-2xl md:text-3xl font-bold text-primary">
-                  {m.value} {m.label && <span className="text-foreground">{m.label}</span>}
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">{m.sub}</div>
-              </div>
-            ))}
+          {/* Terminal — hidden on small screens */}
+          <div className="hidden md:block">
+            <TerminalMock />
           </div>
         </div>
       </div>

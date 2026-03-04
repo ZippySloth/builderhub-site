@@ -1,143 +1,66 @@
 import React from 'react';
-import { Check } from 'lucide-react';
-import { useReveal } from '../../hooks/useReveal';
+import { Badge } from '@/Components/ui/badge';
+import { Card, CardContent } from '@/Components/ui/card';
+import { ArrowDown } from 'lucide-react';
 
-const tiers = [
-  {
-    name: 'Core',
-    price: '$1,500',
-    desc: 'Model hosting + maintenance + 1 report/mo',
-    badge: null,
-  },
-  {
-    name: 'Growth',
-    price: '$2,500',
-    desc: '+ 2 reports/mo + monthly call',
-    badge: 'Most Popular',
-  },
-  {
-    name: 'Command',
-    price: '$3,500',
-    desc: '+ ad hoc pulls + priority Slack',
-    badge: null,
-  },
+const layers = [
+  { label: 'Your Data Sources', desc: 'CRM · Billing · Support · Ops · Spreadsheets', note: 'You own this — always', variant: 'outline' },
+  { label: 'Ingestion Layer', desc: 'We connect all your sources and move data on a schedule — no manual exports', note: 'Managed by BuilderHub', variant: 'secondary' },
+  { label: 'Transformation Models', desc: 'Raw data becomes clean, business-ready metrics. Revenue, churn, cohorts, LTV — defined once, consistently', note: 'BuilderHub IP — hosted by us', variant: 'default' },
+  { label: 'Live Dashboards', desc: 'Auto-updating dashboards your team actually uses. Shareable, always accurate, no manual work', note: 'Hosted & maintained by BuilderHub', variant: 'default' },
+  { label: 'You', desc: 'Log in. See your numbers. Make decisions.', note: null, variant: 'outline' },
 ];
 
-const HowItWorksSection = () => {
-  const [ref, visible] = useReveal();
+const HowItWorksSection = () => (
+  <section id="how-it-works" className="py-20 md:py-28 lg:py-32">
+    <div className="container mx-auto px-4 md:px-6">
+      <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <Badge variant="outline" className="mb-4">The Architecture</Badge>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl mb-4">
+            You own your data.<br />We run the intelligence.
+          </h2>
+          <p className="text-muted-foreground md:text-lg mb-6">
+            Every layer above your raw data — the transformation models, the metric definitions, the dashboards — lives on our infrastructure. You get the outputs. We handle the engine.
+          </p>
+          <Card>
+            <CardContent className="pt-4 pb-4">
+              <p className="text-sm font-medium mb-1">What happens if you cancel?</p>
+              <p className="text-sm text-muted-foreground">
+                You keep your raw data — it's always yours. But the transformation models stop running. Dashboards go dark. Rebuilding that layer from scratch typically requires a $120–180k engineering hire and 3–6 months. Most clients stay because the math is obvious.
+              </p>
+            </CardContent>
+          </Card>
+          <p className="text-sm text-muted-foreground mt-4">
+            Don't have a data warehouse? We set one up for you. Zero existing infrastructure required.
+          </p>
+        </div>
 
-  return (
-    <section id="services" className="py-20 md:py-28 lg:py-32">
-      <div ref={ref} className={`reveal ${visible ? 'visible' : ''}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <span className="bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">
-              The Process
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-4 mb-4">
-              One system. Three steps.
-            </h2>
-          </div>
-
-          {/* Steps */}
-          <div className="space-y-8">
-            {/* Step 01 */}
-            <div className="bg-card border border-border rounded-xl p-8 glow-blue-hover transition-all duration-300">
-              <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span className="text-primary font-bold text-sm tracking-wider">STEP 01</span>
-                <span className="bg-accent/10 text-accent text-xs font-medium px-3 py-1 rounded-full">
-                  Low Risk Entry
-                </span>
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">
-                The Audit{' '}
-                <span className="text-muted-foreground font-normal text-lg">
-                  $750–$1,500 · 3-5 days
-                </span>
-              </h3>
-              <p className="text-muted-foreground mb-4 max-w-3xl">
-                We dig into your current data stack — what tools you use, what's connected, what's broken, what's missing. You get a full gap analysis and a prioritized roadmap of exactly what to fix. Whether you work with us to build anything or not.
-              </p>
-              <p className="text-sm text-primary font-medium mb-2">
-                If we can't find $10,000 of fixable problems in your data stack, we'll refund the audit fee.
-              </p>
-              <p className="text-sm text-primary italic">
-                Credited toward the build if you proceed.
-              </p>
-            </div>
-
-            {/* Step 02 */}
-            <div className="bg-card border border-border rounded-xl p-8 glow-blue-hover transition-all duration-300">
-              <div className="mb-4">
-                <span className="text-primary font-bold text-sm tracking-wider">STEP 02</span>
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">
-                The Build{' '}
-                <span className="text-muted-foreground font-normal text-lg">
-                  $5,000–$15,000 · 3-6 weeks
-                </span>
-              </h3>
-              <p className="text-muted-foreground mb-6 max-w-3xl">
-                We connect your data sources, build the transformation models, and put live auto-updating dashboards on top. No more manual updates. No more "the numbers don't match."
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  '2-5 data source connections',
-                  'Full data model layer (staging → marts)',
-                  '4-6 live dashboards',
-                  'Documentation + training',
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-foreground">
-                    <Check className="w-4 h-4 text-accent shrink-0" />
-                    <span className="text-sm">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Step 03 */}
-            <div className="bg-card border border-border rounded-xl p-8 glow-blue-hover transition-all duration-300">
-              <div className="mb-4">
-                <span className="text-primary font-bold text-sm tracking-wider">STEP 03</span>
-              </div>
-              <h3 className="text-2xl font-bold text-foreground mb-2">
-                The Retainer{' '}
-                <span className="text-muted-foreground font-normal text-lg">monthly</span>
-              </h3>
-              <p className="text-muted-foreground mb-6 max-w-3xl">
-                We host and maintain everything. Models, dashboards, metrics — all running, all evolving as your business grows.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {tiers.map((tier, i) => (
-                  <div
-                    key={i}
-                    className={`relative bg-secondary/50 border rounded-xl p-5 ${
-                      tier.badge
-                        ? 'border-primary/50 glow-blue'
-                        : 'border-border'
-                    }`}
-                  >
-                    {tier.badge && (
-                      <span className="absolute -top-3 left-4 bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
-                        {tier.badge}
-                      </span>
-                    )}
-                    <h4 className="text-lg font-bold text-foreground">{tier.name}</h4>
-                    <div className="text-2xl font-bold text-primary mt-1">
-                      {tier.price}
-                      <span className="text-sm text-muted-foreground font-normal">/mo</span>
+        <div className="flex flex-col items-center gap-2 max-w-sm mx-auto w-full">
+          {layers.map((layer, i) => (
+            <React.Fragment key={i}>
+              <Card className={`w-full ${layer.variant === 'default' ? 'border-primary/40 bg-primary/5' : ''}`}>
+                <CardContent className="py-3 px-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <div>
+                      <p className="font-semibold text-sm">{layer.label}</p>
+                      <p className="text-xs text-muted-foreground">{layer.desc}</p>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-2">{tier.desc}</p>
+                    {layer.note && (
+                      <Badge variant={layer.variant === 'default' ? 'default' : 'secondary'} className="text-xs shrink-0">
+                        {layer.note}
+                      </Badge>
+                    )}
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
+                </CardContent>
+              </Card>
+              {i < layers.length - 1 && <ArrowDown className="h-4 w-4 text-muted-foreground" />}
+            </React.Fragment>
+          ))}
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default HowItWorksSection;

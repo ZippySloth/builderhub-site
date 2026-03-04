@@ -1,0 +1,36 @@
+# BuilderHub
+
+> Managed data intelligence for growth companies. We build and run the data layer — pipelines, transformation models, and dashboards — so your numbers finally tell the right story.
+
+BuilderHub is a managed service, not a consultancy. We connect your data sources, build the transformation layer (proprietary data models), and deliver live auto-updating dashboards. We then maintain everything on a monthly retainer. You own your raw data. We own and operate the intelligence layer on top.
+
+## Services
+
+- [Data Audit](https://buildrhub.io/#services): 3-5 day assessment of your current data stack. Full gap analysis, data maturity score, and prioritized build roadmap. $750–$1,500. Fee credited toward the build.
+- [Foundation Build](https://buildrhub.io/#services): Full data stack build — source connections, transformation models, 4-6 live dashboards. 3-6 weeks. $5,000–$15,000.
+- [Managed Retainer](https://buildrhub.io/#services): Ongoing hosting, maintenance, and evolution. Core $1,500/mo · Growth $2,500/mo · Command $3,500/mo.
+- [AI Agents](https://buildrhub.io/#services): Automated alerts, scheduled reports, natural language data queries, anomaly detection. $1,000–$5,000 implementation + $500–$3,500/mo maintenance.
+
+## Who We Serve
+
+- Post-acquisition SMBs needing unified reporting across two systems
+- Series B SaaS companies preparing for board and investor scrutiny
+- Companies evaluating a first data engineering hire ($150k+) who want faster, cheaper results
+- New finance or operations leaders inheriting broken reporting infrastructure
+
+## Key Facts
+
+- Delivery: 3–6 weeks to working dashboards
+- Typical result: 10–20 hours/week saved in manual reporting
+- Cost advantage: Equivalent output to a $150k+/year in-house hire
+- Location: Montreal, Canada · Serving US and Canadian companies
+- Contact: contact@buildrhub.io
+- Book a call: https://calendly.com/fazio/audit
+
+## Architecture
+
+Raw data lives in the client's warehouse (client-owned). All transformation models, metric definitions, semantic layer, and dashboards are hosted and operated by BuilderHub (BuilderHub IP). If a client cancels, they retain raw data but lose all transformation logic and dashboard access.
+
+## Optional
+
+BuilderHub also implements AI agent systems for clients — automated monitoring, alerting, scheduled reporting, and natural language data queries. These are deployed on top of the existing data stack.
