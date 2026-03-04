@@ -26,27 +26,55 @@ const retainerTiers = [
     name: 'Core',
     price: '$1,500',
     description: 'Model hosting + maintenance + 1 new report/month',
-    features: ['Transformation model hosting', 'Maintenance & bug fixes', '1 new report or dashboard/mo', 'Email support (<24h)'],
+    features: [
+      'Transformation model hosting',
+      'Maintenance & bug fixes',
+      '1 new report or dashboard/mo',
+      'Email support (<24h)',
+    ],
   },
   {
     name: 'Growth',
     price: '$2,500',
     popular: true,
     description: 'Everything in Core plus more reports and a monthly strategy call',
-    features: ['Everything in Core', '2 new reports/mo', 'Monthly 30-min analytics call', 'Slack access'],
+    features: [
+      'Everything in Core',
+      '2 new reports/mo',
+      'Monthly 30-min analytics call',
+      'Slack access',
+    ],
   },
   {
     name: 'Command',
     price: '$3,500',
-    description: 'Full managed analytics team. Ad hoc requests, priority access.',
-    features: ['Everything in Growth', 'Unlimited ad hoc data pulls', 'Priority Slack (<4h response)', 'Quarterly roadmap review'],
+    description: 'Full managed analytics team — ad hoc requests, priority access.',
+    features: [
+      'Everything in Growth',
+      'Unlimited ad hoc data pulls',
+      'Priority Slack (<4h response)',
+      'Quarterly roadmap review',
+    ],
   },
 ];
+
+const FeatureList = ({ items }) => (
+  <ul className="space-y-2">
+    {items.map((item, i) => (
+      <li key={i} className="flex items-start gap-2 text-sm">
+        <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+);
 
 const ServicesSection = () => (
   <section id="services" className="py-20 md:py-28 lg:py-32 bg-muted/30">
     <div className="container mx-auto px-4 md:px-6">
-      <div className="text-center mb-16">
+
+      {/* Header */}
+      <div className="text-center mb-12 md:mb-16">
         <Badge variant="outline" className="mb-4">The Process</Badge>
         <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">
           One system. Three steps.
@@ -57,33 +85,27 @@ const ServicesSection = () => (
       </div>
 
       {/* Step 1 + Step 2 */}
-      <div className="grid md:grid-cols-2 gap-6 mb-12">
+      <div className="grid sm:grid-cols-2 gap-6 mb-10">
+
         {/* Audit */}
-        <Card>
+        <Card className="flex flex-col">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
               <Badge>Step 01</Badge>
               <Badge variant="secondary">Low Risk Entry</Badge>
             </div>
-            <CardTitle className="text-2xl mt-3">The Data Audit</CardTitle>
-            <CardDescription className="text-base">
-              We dig into your current stack — what tools you use, what's connected, what's broken. You get a full gap analysis and prioritized roadmap. Valuable whether you hire us to build or not.
+            <CardTitle className="text-xl mt-2">The Data Audit</CardTitle>
+            <CardDescription>
+              We dig into your current stack — what's connected, what's broken. You get a full gap analysis and prioritized roadmap. Valuable whether you hire us or not.
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <ul className="space-y-2">
-              {auditIncludes.map((item, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm">
-                  <Check className="h-4 w-4 text-green-500 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+          <CardContent className="flex-1">
+            <FeatureList items={auditIncludes} />
             <p className="text-xs text-muted-foreground mt-4 italic">
               Fee credited toward the build if you proceed within 30 days.
             </p>
           </CardContent>
-          <CardFooter className="flex items-center justify-between">
+          <CardFooter className="flex items-center justify-between mt-auto pt-4">
             <div>
               <span className="text-2xl font-bold">$750</span>
               <span className="text-muted-foreground text-sm"> – $1,500</span>
@@ -93,28 +115,21 @@ const ServicesSection = () => (
         </Card>
 
         {/* Build */}
-        <Card>
+        <Card className="flex flex-col">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
               <Badge>Step 02</Badge>
               <Badge variant="secondary">3–6 Weeks</Badge>
             </div>
-            <CardTitle className="text-2xl mt-3">The Foundation Build</CardTitle>
-            <CardDescription className="text-base">
+            <CardTitle className="text-xl mt-2">The Foundation Build</CardTitle>
+            <CardDescription>
               We connect your data sources, build the transformation layer, and deliver live dashboards. No more manual updates. No more "the numbers don't match."
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <ul className="space-y-2">
-              {buildIncludes.map((item, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm">
-                  <Check className="h-4 w-4 text-green-500 shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+          <CardContent className="flex-1">
+            <FeatureList items={buildIncludes} />
           </CardContent>
-          <CardFooter className="flex items-center justify-between">
+          <CardFooter className="flex items-center justify-between mt-auto pt-4">
             <div>
               <span className="text-2xl font-bold">$5,000</span>
               <span className="text-muted-foreground text-sm"> – $15,000</span>
@@ -125,22 +140,24 @@ const ServicesSection = () => (
       </div>
 
       {/* Step 3 — Retainer */}
-      <div className="mb-4">
-        <div className="flex items-center gap-3 mb-6">
+      <div className="mb-6">
+        <div className="flex flex-wrap items-center gap-3 mb-6">
           <Badge>Step 03</Badge>
-          <h3 className="text-xl font-semibold">The Managed Retainer — Always Running. Always Evolving.</h3>
+          <h3 className="text-lg font-semibold">The Managed Retainer — Always Running. Always Evolving.</h3>
         </div>
+
         <Tabs defaultValue="growth">
-          <TabsList className="mb-6">
-            <TabsTrigger value="core">Core</TabsTrigger>
-            <TabsTrigger value="growth">Growth</TabsTrigger>
-            <TabsTrigger value="command">Command</TabsTrigger>
+          <TabsList className="w-full sm:w-auto mb-6">
+            <TabsTrigger value="core" className="flex-1 sm:flex-none">Core</TabsTrigger>
+            <TabsTrigger value="growth" className="flex-1 sm:flex-none">Growth</TabsTrigger>
+            <TabsTrigger value="command" className="flex-1 sm:flex-none">Command</TabsTrigger>
           </TabsList>
+
           {retainerTiers.map((tier) => (
             <TabsContent key={tier.name} value={tier.name.toLowerCase()}>
               <Card>
                 <CardHeader>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
                     <CardTitle>{tier.name}</CardTitle>
                     {tier.popular && <Badge>Most Popular</Badge>}
                   </div>
@@ -151,17 +168,10 @@ const ServicesSection = () => (
                   <CardDescription>{tier.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2">
-                    {tier.features.map((f, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm">
-                        <Check className="h-4 w-4 text-green-500 shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
+                  <FeatureList items={tier.features} />
                 </CardContent>
                 <CardFooter>
-                  <Button asChild>
+                  <Button asChild className="w-full sm:w-auto">
                     <a href="https://calendly.com/fazio/audit" target="_blank" rel="noopener noreferrer">
                       Start with an Audit <ArrowRight className="ml-2 h-4 w-4" />
                     </a>
@@ -174,14 +184,12 @@ const ServicesSection = () => (
       </div>
 
       {/* Agents add-on */}
-      <Card className="mt-8 border-dashed">
+      <Card className="border-dashed">
         <CardHeader>
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary">Add-On or Standalone</Badge>
-          </div>
+          <Badge variant="secondary" className="w-fit mb-1">Add-On or Standalone</Badge>
           <CardTitle>AI Agents — Alerts, Reports & Automation</CardTitle>
           <CardDescription>
-            Agents that monitor your data, send alerts when metrics move, generate scheduled reports, and answer questions about your data in plain language. Deployed on your data stack and maintained by us.
+            Agents that monitor your data, fire alerts when metrics move, generate scheduled reports, and answer plain-language questions about your numbers. Hosted and maintained by us.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -192,11 +200,12 @@ const ServicesSection = () => (
             </div>
             <div>
               <p className="font-medium mb-1">Monthly Maintenance</p>
-              <p className="text-muted-foreground">$500 – $3,500/mo depending on complexity</p>
+              <p className="text-muted-foreground">$500 – $3,500/mo</p>
             </div>
           </div>
         </CardContent>
       </Card>
+
     </div>
   </section>
 );

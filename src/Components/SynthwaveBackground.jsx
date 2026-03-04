@@ -18,14 +18,13 @@ export default function SynthwaveBackground({ isDarkMode }) {
     let HORIZON_Y = canvas.height * 0.6;
     const GRID_ROWS = 20;
 
-    // 🌓 Dynamic theme colors
     const BACKGROUND_COLOR = isDarkMode ? "#0a0a1a" : "#ffffff";
     const GRID_COLOR_1 = isDarkMode ? "rgba(0, 255, 240, 0.7)" : "rgba(255, 0, 0, 0.5)";
     const GRID_COLOR_2 = isDarkMode ? "rgba(0, 255, 240, 0.3)" : "rgba(255, 100, 100, 0.5)";
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
       HORIZON_Y = canvas.height * 0.6;
     };
 
@@ -78,7 +77,7 @@ export default function SynthwaveBackground({ isDarkMode }) {
   }, [isDarkMode]);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden -z-10">
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
       <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full" />
     </div>
   );
