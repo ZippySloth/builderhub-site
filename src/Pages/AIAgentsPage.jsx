@@ -1,16 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Zap, Bell, FileText, MessageSquare, AlertTriangle, Settings, Mail } from 'lucide-react';
+import { Zap, Bell, FileText, MessageSquare, AlertTriangle, Settings, Mail, Calendar, Search, Database, RefreshCw, TrendingUp, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import FadeIn from '../Components/FadeIn';
 
 const features = [
-  { icon: Bell, title: 'Metric alerts', desc: 'Get notified when MRR drops, churn spikes, or targets are hit.' },
-  { icon: FileText, title: 'Scheduled reports', desc: 'Weekly and monthly reports delivered to inbox or Slack.' },
-  { icon: MessageSquare, title: 'Natural language queries', desc: 'Ask questions in plain English. Get data answers instantly.' },
-  { icon: AlertTriangle, title: 'Anomaly detection', desc: 'AI flags unusual patterns before they become problems.' },
-  { icon: Settings, title: 'Custom automations', desc: 'Trigger workflows based on data changes and thresholds.' },
-  { icon: Mail, title: 'Slack/email delivery', desc: 'Reports and alerts go where your team already works.' },
+  { icon: Bell, title: 'Metric alerts', desc: 'Get notified the moment MRR drops, churn spikes, burn accelerates, or any threshold is crossed.' },
+  { icon: FileText, title: 'Scheduled reports', desc: 'Weekly and monthly reports built and delivered automatically — inbox, Slack, or wherever your team lives.' },
+  { icon: MessageSquare, title: 'Natural language queries', desc: 'Ask questions in plain English. Get back data answers, charts, and summaries instantly.' },
+  { icon: AlertTriangle, title: 'Anomaly detection', desc: 'AI surfaces unusual patterns before they become crises — revenue drops, cost spikes, traffic anomalies.' },
+  { icon: Settings, title: 'Custom automations', desc: 'Trigger downstream actions based on data thresholds — no manual intervention required.' },
+  { icon: Mail, title: 'Slack & email delivery', desc: 'Every report and alert goes where your team already works. Zero dashboard-checking required.' },
+  { icon: Calendar, title: 'Meeting prep briefs', desc: 'Auto-generated summaries of account health, pipeline status, and key metrics before every important call.' },
+  { icon: Search, title: 'Competitive monitoring', desc: 'Track competitor pricing, reviews, job postings, and news changes — surfaced automatically when something shifts.' },
+  { icon: Database, title: 'Data enrichment', desc: 'Auto-fill missing CRM fields, company firmographics, and contact details from external sources.' },
+  { icon: RefreshCw, title: 'CRM auto-updates', desc: 'Sync data between your tools automatically. No manual entry — always up to date.' },
+  { icon: TrendingUp, title: 'Forecast automation', desc: 'Revenue, cash flow, and capacity forecasts recalculated automatically whenever inputs change.' },
+  { icon: Users, title: 'Stakeholder digests', desc: 'Board, investor, and partner updates written and delivered automatically on your schedule.' },
 ];
 
 const steps = [

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { Layers, ShoppingCart, Megaphone, DollarSign, Heart, Wrench, Check, AlertTriangle } from 'lucide-react';
+import { Layers, ShoppingCart, Megaphone, DollarSign, Heart, Wrench, TrendingUp, Rocket, Building2, Shield, Scale, Activity, Briefcase, Factory, ShoppingBag, Truck, UtensilsCrossed, Users, HeartHandshake, Newspaper, Check, AlertTriangle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { industries } from '../data/industries';
 import FadeIn from '../Components/FadeIn';
 
-const iconMap = { Layers, ShoppingCart, Megaphone, DollarSign, Heart, Wrench };
+const iconMap = { Layers, ShoppingCart, Megaphone, DollarSign, Heart, Wrench, TrendingUp, Rocket, Building2, Shield, Scale, Activity, Briefcase, Factory, ShoppingBag, Truck, UtensilsCrossed, Users, HeartHandshake, Newspaper };
 
 const IndustryPage = () => {
   const { slug } = useParams();

@@ -21,7 +21,7 @@ const HeroSection = () => (
     <div className="container mx-auto px-4 md:px-6 relative z-10">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <FadeIn>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-tight">
             Your data is a mess.
             <br />
             <span className="gradient-text">We fix it.</span>
