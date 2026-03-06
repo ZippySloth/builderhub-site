@@ -28,7 +28,7 @@ const BeforeAfter = () => (
         >
           <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-red-500/10 text-red-400 border border-red-500/20 mb-4">Before</span>
           <p className="text-sm font-mono text-muted-foreground mb-3">Q4_Revenue_FINAL_v3.xlsx</p>
-          <div className="grid grid-cols-4 gap-px bg-white/5 rounded-lg overflow-hidden text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/5 rounded-lg overflow-hidden text-xs">
             {spreadsheetRows.map((row, ri) => (
               row.map((cell, ci) => (
                 <div

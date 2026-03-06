@@ -10,7 +10,7 @@ const ROICalculator = () => {
     <section className="py-24 md:py-32">
       <div className="container mx-auto px-4 md:px-6 max-w-2xl">
         <FadeIn>
-          <div className="glass rounded-2xl p-8 md:p-12 glow-purple">
+          <div className="glass rounded-2xl p-5 sm:p-8 md:p-12 glow-purple">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
               What is manual reporting <span className="gradient-text">costing you?</span>
             </h2>
@@ -43,7 +43,7 @@ const ROICalculator = () => {
 
             <div className="text-center">
               <p className="text-lg text-muted-foreground mb-2">You spend</p>
-              <p className="text-5xl md:text-6xl font-bold gradient-text mb-2">${monthly.toLocaleString()}<span className="text-2xl">/mo</span></p>
+              <p className="text-3xl sm:text-5xl md:text-6xl font-bold gradient-text mb-2">${monthly.toLocaleString()}<span className="text-2xl">/mo</span></p>
               <p className="text-lg text-muted-foreground">on manual reporting</p>
               <p className="text-sm text-muted-foreground mt-6">BuilderHub starts at $1,500/mo. Do the math.</p>
             </div>

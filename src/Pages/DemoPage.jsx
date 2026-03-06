@@ -14,14 +14,14 @@ const DemoPage = () => (
       <div className="container mx-auto px-4 md:px-6">
         <FadeIn>
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Book a <span className="gradient-text">free call</span></h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Book a <span className="gradient-text">free call</span></h1>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
               See what we would build for your business. 15 minutes. No prep.
             </p>
           </div>
         </FadeIn>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto items-start">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto items-start">
           {/* Left — what to expect */}
           <FadeIn>
             <h2 className="text-2xl font-bold text-white mb-8">What to expect</h2>
@@ -44,11 +44,12 @@ const DemoPage = () => (
 
           {/* Right — Calendly embed */}
           <FadeIn delay={0.2}>
-            <div className="glass rounded-2xl overflow-hidden" style={{ minHeight: '660px' }}>
+            <div className="glass rounded-2xl overflow-hidden" style={{ minHeight: '500px' }}>
               <iframe
                 src="https://calendly.com/fazio/audit"
                 width="100%"
-                height="660"
+                height="100%"
+                style={{ minHeight: '500px' }}
                 frameBorder="0"
                 title="Book a call"
                 className="w-full"
