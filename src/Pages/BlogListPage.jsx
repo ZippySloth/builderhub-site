@@ -23,7 +23,7 @@ const BlogListPage = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...blogPosts].reverse().map((post) => (
+          {(() => { const today = new Date().toISOString().split('T')[0]; return [...blogPosts].filter(p => p.date <= today).reverse(); })().map((post) => (
             <Card key={post.slug} className="flex flex-col">
               <CardHeader className="flex-1">
                 <div className="flex flex-wrap gap-2 mb-2">

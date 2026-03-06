@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layers, ShoppingCart, Megaphone, DollarSign, Heart, Wrench } from 'lucide-react';
+import { Layers, ShoppingCart, Megaphone, DollarSign, Heart, Wrench, TrendingUp, Rocket, Building2, Shield, Scale, Activity, Briefcase, Factory, ShoppingBag, Truck, UtensilsCrossed, Users, HeartHandshake, Newspaper } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { industries } from '../data/industries';
 import FadeIn from '../Components/FadeIn';
 
-const iconMap = { Layers, ShoppingCart, Megaphone, DollarSign, Heart, Wrench };
+const iconMap = { Layers, ShoppingCart, Megaphone, DollarSign, Heart, Wrench, TrendingUp, Rocket, Building2, Shield, Scale, Activity, Briefcase, Factory, ShoppingBag, Truck, UtensilsCrossed, Users, HeartHandshake, Newspaper };
 
 const IndustriesPage = () => (
   <div className="pt-20">
@@ -20,7 +20,7 @@ const IndustriesPage = () => (
           </div>
         </FadeIn>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {industries.map((ind, i) => {
             const Icon = iconMap[ind.icon];
             return (

@@ -34,7 +34,7 @@ const Navbar = () => {
   const close = () => { setMobileOpen(false); setDropdownOpen(false); };
 
   return (
-    <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${mobileOpen || scrolled ? 'bg-background/95 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'}`}>
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/" className="flex items-center" onClick={close}>
           <img src={logoWhite} alt="BuilderHub" className="h-8 md:h-10" />
@@ -81,7 +81,7 @@ const Navbar = () => {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden fixed inset-0 top-16 bg-background/95 backdrop-blur-xl z-40">
+        <div className="md:hidden fixed inset-0 top-16 bg-background backdrop-blur-xl z-40">
           <nav className="flex flex-col gap-6 p-8 text-lg font-medium">
             <p className="text-xs text-muted-foreground uppercase tracking-wider">Services</p>
             {serviceLinks.map(({ to, icon: Icon, label }) => (

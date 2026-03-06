@@ -5,7 +5,7 @@ import logoWhite from '../../assets/logo_white.png';
 const Footer = () => (
   <footer className="border-t border-white/5 bg-[#06060f] py-16">
     <div className="container mx-auto px-4 md:px-6">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mb-12">
         <div className="col-span-2 md:col-span-1">
           <img src={logoWhite} alt="BuilderHub" className="h-7 mb-4" />
           <p className="text-sm text-muted-foreground leading-relaxed">

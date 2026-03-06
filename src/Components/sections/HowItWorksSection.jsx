@@ -15,7 +15,7 @@ const HowItWorksSection = () => (
           Three steps. <span className="gradient-text">That is it.</span>
         </h2>
       </FadeIn>
-      <div className="relative grid md:grid-cols-3 gap-12 md:gap-8">
+      <div className="relative grid md:grid-cols-3 gap-8">
         <div className="hidden md:block absolute top-10 left-[16.67%] right-[16.67%] h-px border-t-2 border-dashed border-violet-500/30" />
 
         {steps.map((s, i) => (

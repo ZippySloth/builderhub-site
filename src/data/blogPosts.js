@@ -1,3 +1,7 @@
+import { batch1 } from './blogPosts_batch1';
+import { batch2 } from './blogPosts_batch2';
+import { batch3 } from './blogPosts_batch3';
+
 export const blogPosts = [
   {
     slug: 'why-your-dashboards-dont-get-used',
@@ -138,4 +142,7 @@ Divided by account size, this tells you where your product still has friction. H
 These 8 metrics don't require a data warehouse to track — but they do require clean, consistent data. If you can't pull these in under 10 minutes, that's the first problem to solve.
     `,
   },
+  ...batch1,
+  ...batch2,
+  ...batch3,
 ];

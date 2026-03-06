@@ -14,14 +14,14 @@ const barHeights = [45, 65, 55, 80, 70, 90];
 const HeroSection = () => (
   <section className="relative min-h-screen flex items-center overflow-hidden">
     {/* Floating gradient orbs */}
-    <div className="absolute top-1/4 -left-32 w-96 h-96 bg-violet-600/20 rounded-full blur-3xl animate-float" />
-    <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-purple-500/15 rounded-full blur-3xl animate-float-slow" />
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-64 h-64 bg-violet-400/10 rounded-full blur-3xl animate-float" />
+    <div className="absolute top-1/4 -left-32 w-64 h-64 sm:w-96 sm:h-96 bg-violet-600/20 rounded-full blur-3xl animate-float" />
+    <div className="absolute bottom-1/4 -right-32 w-48 h-48 sm:w-80 sm:h-80 bg-purple-500/15 rounded-full blur-3xl animate-float-slow" />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-40 h-40 sm:w-64 sm:h-64 bg-violet-400/10 rounded-full blur-3xl animate-float" />
 
     <div className="container mx-auto px-4 md:px-6 relative z-10">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <FadeIn>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-tight">
             Your data is a mess.
             <br />
             <span className="gradient-text">We fix it.</span>

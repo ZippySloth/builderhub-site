@@ -30,15 +30,15 @@ const DashboardsPage = () => (
   <div className="pt-20">
     {/* Hero */}
     <section className="py-24 md:py-32 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl" />
+      <div className="absolute top-0 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-violet-600/10 rounded-full blur-3xl" />
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <FadeIn>
           <div className="max-w-3xl">
             <BarChart3 className="h-12 w-12 text-violet-400 mb-6" />
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6">
               Dashboards that actually <span className="gradient-text">get used</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl">
+            <p className="text-base sm:text-xl text-muted-foreground mb-8 max-w-2xl">
               Live, auto-updating dashboards built on your real data. No more exports. No more outdated reports.
             </p>
             <Link to="/demo" className="inline-flex items-center px-8 py-4 text-base font-medium text-white rounded-full bg-gradient-to-r from-violet-600 to-purple-500 hover:from-violet-500 hover:to-purple-400 transition-all shadow-lg shadow-violet-500/25">
@@ -87,7 +87,7 @@ const DashboardsPage = () => (
     <section className="py-24 md:py-32">
       <div className="container mx-auto px-4 md:px-6 max-w-4xl">
         <FadeIn>
-          <div className="glass rounded-2xl p-8 glow-purple">
+          <div className="glass rounded-2xl p-5 sm:p-8 glow-purple">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {mockMetrics.map((m) => (
                 <div key={m.label} className="glass rounded-xl p-4">
@@ -126,7 +126,7 @@ const DashboardsPage = () => (
     <section className="py-24 md:py-32 text-center">
       <div className="container mx-auto px-4 md:px-6">
         <FadeIn>
-          <h2 className="text-4xl font-bold mb-6">Ready to see your data <span className="gradient-text">clearly?</span></h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6">Ready to see your data <span className="gradient-text">clearly?</span></h2>
           <Link to="/demo" className="inline-flex items-center px-8 py-4 text-base font-medium text-white rounded-full bg-gradient-to-r from-violet-600 to-purple-500 hover:from-violet-500 hover:to-purple-400 transition-all shadow-lg shadow-violet-500/25">
             Book a Free Call →
           </Link>
