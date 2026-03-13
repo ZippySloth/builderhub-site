@@ -3,6 +3,117 @@
 
 export const aiBatch = [
   {
+    slug: 'dental-group-kpi-dashboard',
+    title: 'The Dental Group KPI Dashboard Every DSO Needs (But Almost None Have)',
+    excerpt: "When you're running 3+ dental locations, chair utilization and AR aging in a spreadsheet is already costing you money. Here's what a real dental group KPI dashboard tracks — and why it changes how multi-location practices are run.",
+    date: '2026-03-13',
+    readTime: '7 min read',
+    tags: ['Dental', 'Healthcare', 'Dashboards', 'Multi-Location', 'Operations'],
+    content: `
+If you're running three or more dental locations, you already know the problem: your practice management software shows you each location in isolation, your office managers email you weekly spreadsheets that don't match each other, and asking "which location is actually producing well this month?" takes half a day to piece together — if it gets answered at all.
+
+A dental group KPI dashboard changes this. Not a practice management report you export on Friday afternoons, and not a generic BI template — a purpose-built view of the metrics that drive profitability in a multi-location dental group. This post walks through what that dashboard should contain, what most DSOs get wrong when they try to build one, and what to do about it.
+
+## Why Multi-Location Dental Reporting Is Uniquely Difficult
+
+A single-location practice can survive on practice management software reports. The moment you add a second location — or a third, a fifth, a fifteenth — the reporting breaks down fast.
+
+Dental groups typically run one or more of the following: Dentrix, Eaglesoft, OpenDental, or Curve. These platforms are built for clinical and scheduling workflows, not for cross-location financial analysis. Exporting data from them is manual, inconsistent, and often requires someone who knows how to navigate their specific version of the software.
+
+Add to that: each location may have its own payer contracts, its own provider mix, its own overhead structure. Your hygiene team's reappointment rate at the downtown location doesn't mean the same thing as it does at the suburban location with a different patient demographic. Rolling up those numbers without context produces data that looks clean but misleads.
+
+The result: most DSOs are making capital allocation, staffing, and expansion decisions based on data that's a month old, manually compiled, and already partially wrong.
+
+## The 8 Metrics a Dental Group KPI Dashboard Must Show
+
+### 1. Production per Provider per Day
+
+This is the most direct measure of clinical capacity utilization. Production per provider per day = total production ÷ (providers on schedule × scheduled days). Track it by provider, by location, and in aggregate.
+
+Industry benchmarks for GP production run $1,200–$2,000+ per provider per day depending on market and case mix. Knowing where each provider sits against that range — and watching the trend — tells you whether a location is running efficiently or has scheduling, case acceptance, or staffing issues hiding underneath the headline number.
+
+### 2. Chair Utilization Rate
+
+Physical chairs are your fixed cost. Chair utilization = total scheduled hours ÷ total available chair hours. A location running at 65% chair utilization when your lease and overhead is built for 85% is burning margin invisibly. Tracking this across locations lets you identify where you have capacity to grow without adding overhead, and where you're running into real capacity constraints.
+
+### 3. Treatment Acceptance Rate
+
+How much of the treatment you're diagnosing and presenting is actually being accepted and scheduled? Treatment acceptance rates typically run 50–75% across dental groups, with significant variation by location and by provider. A provider with a 40% acceptance rate isn't just underperforming — they're creating a downstream hygiene problem as patients defer treatment and eventually leave the practice.
+
+This metric requires clean case presentation data from your practice management system. Most DSOs don't track it systematically. The ones that do find it one of the highest-leverage numbers to move.
+
+### 4. AR Aging by Payer Type
+
+Insurance AR and patient AR have different aging profiles and different collection levers. Your dashboard should show outstanding balances broken into 30/60/90/120+ day buckets, split by payer type (commercial insurance, Medicaid/government payers, patient responsibility).
+
+A $200K insurance AR balance aging past 90 days is a billing and follow-up problem. A $200K patient AR balance aging past 60 days is a collections conversation and potentially a credit policy problem. Treating them the same is one of the most common ways dental groups lose revenue they've already earned.
+
+### 5. Payer Mix and Reimbursement Rate by Location
+
+Not all patients are equally profitable. Your payer mix — the proportion of production coming from fee-for-service, PPO, HMO, and Medicaid patients — directly determines your effective reimbursement rate and, downstream, your margin.
+
+A location that's shifted from 60% PPO / 40% FFS to 75% PPO / 25% FFS over 18 months has a profitability trend worth understanding. Your dashboard should show payer mix by location, trended quarterly, alongside the effective reimbursement rate for your top five payers. Changes in that rate — even half a percentage point — compound across a group your size.
+
+### 6. Hygiene Reappointment Rate
+
+Your hygiene department is both a recurring revenue engine and a patient retention metric in disguise. Hygiene reappointment rate = patients who scheduled their next appointment before leaving ÷ total hygiene patients seen. The industry benchmark for a well-run practice is 85–90%+.
+
+A location running at 65% reappointment means 35% of your hygiene patients are walking out the door without a follow-up scheduled. Some of them will call back. Many won't. Track this by location and by hygienist — it surfaces training and protocol issues faster than any other single metric.
+
+### 7. New Patient Volume and Source
+
+New patients are the top of your funnel and one of the most expensive assets in a dental group to acquire. Your dashboard should show new patient count by location, month-over-month trend, and — if you have it — source (Google, referral, insurance directory, walk-in).
+
+New patient volume below replacement rate at any location is an early warning sign of a retention or marketing problem. Catching it when it first appears — instead of six months later when the schedule starts thinning out — is the difference between a recoverable problem and an urgent one.
+
+### 8. Lab Cost as a Percentage of Production
+
+Lab fees are one of the most controllable variable costs in a dental group, and most groups don't track them at the location level. Lab cost as a % of production should run 8–12% for most general practices; higher percentages indicate either case mix changes (more complex restorative work) or lab contract issues worth reviewing.
+
+When you see lab costs jump at a specific location without a corresponding change in case mix, it usually points to a specific provider ordering outside the group's preferred lab — a meaningful variance once you're at scale.
+
+## What the Dashboard Should Actually Look Like
+
+**Group summary view** — One page showing all locations side by side: production per provider, chair utilization, new patients, and any alerts (AR aging spike, reappointment rate drop, production variance). This is the Monday morning view.
+
+**Location drill-down** — Click into any location for the full picture: production by provider, treatment acceptance rate, AR by payer, schedule efficiency, and trailing 12-month trend.
+
+**Billing and AR detail** — Dedicated view for revenue cycle: aging breakdown by payer, recent claim submission vs. payment timelines, and outstanding balance by responsible party.
+
+**Provider performance** — Each provider's production, case acceptance, and schedule efficiency, normalized for days worked. This view becomes critical as your group grows and you're evaluating expansion, compensation structures, or associate performance.
+
+Each view should update daily, automatically — pulling from your practice management software and your billing system without requiring anyone to export a spreadsheet.
+
+## Where Most DSOs Stall
+
+The data to build a dental group KPI dashboard exists in your systems. The problem is that practice management software exports are inconsistent across versions, payer data lives separately from clinical data, and nobody has gone through the work of standardizing the data model across locations.
+
+What "production" means in Dentrix doesn't always mean the same thing as it means in Eaglesoft if you've grown through acquisitions. Your two locations on OpenDental may have different chart of accounts structures. Before you can build a meaningful dashboard, someone has to do the integration and normalization work — connecting sources, defining what each metric means and how it's calculated, and ensuring the numbers your dashboard shows match what your team believes to be true.
+
+This is exactly where most dental groups stall. They know they need better visibility. They look at hiring a data analyst, realize that person also needs to know dental operations well enough to build the right thing, and put it off until the pain gets bad enough. Meanwhile, the spreadsheets multiply.
+
+## How BuilderHub Helps
+
+BuilderHub builds and maintains analytics infrastructure for multi-location operators — including dental groups and DSOs — that have real data complexity but no dedicated data team.
+
+For a dental group, that typically means connecting your practice management system and billing platform, standardizing the data model across locations, and building the group-level KPI dashboard your leadership team actually uses daily. The output is a live dashboard that updates automatically — not a one-time report that becomes stale in two weeks.
+
+The setup takes a few weeks, not months. The ongoing cost is a fraction of what a data analyst hire would run. And unlike a generic BI tool, the dashboard is built around the actual metrics that matter in dental — chair utilization, payer mix, treatment acceptance, AR aging — not whatever default charts came with the software.
+
+## Getting Started Without Overbuilding
+
+If you're building this for the first time, start with four numbers: production per provider per day, AR aging by payer, hygiene reappointment rate, and new patient volume. Get those clean, live, and trusted before adding anything else.
+
+A dental group KPI dashboard your leadership team checks every Monday morning is worth more than a comprehensive reporting suite nobody opens. Build for daily use first, completeness second.
+
+## The Bottom Line
+
+A dental group KPI dashboard isn't a reporting upgrade — it's the operating infrastructure for a multi-location practice that wants to be run like a business. When chair utilization, payer mix, treatment acceptance, and AR aging are visible in one place, updated daily, broken out by location and provider, decisions get faster and better: staffing adjustments, billing follow-up, location expansion, associate performance reviews.
+
+The DSOs that build this reporting foundation early consistently outperform those that don't. Not by accident — because they can see where the money is going and act on it before it's already gone.
+`,
+  },
+  {
     slug: 'property-management-reporting-dashboard',
     title: 'The Property Management Reporting Dashboard Every PM Company Needs',
     excerpt: "When you're managing 15+ properties, your QuickBooks P&L is useless — everything is blended. Here's what a real property management reporting dashboard looks like and why it changes how you run the business.",
